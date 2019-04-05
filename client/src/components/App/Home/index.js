@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Button } from 'semantic-ui-react';
+import { Header, Button, Message } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import Section from 'components/shared/Section';
@@ -15,6 +15,15 @@ export default function Home() {
       </Section>
 
       <Section placeholder textAlign="center">
+        <Section size="big">
+          <Message compact>
+            <Message.Header>This is a simple game</Message.Header>
+            <p>
+              Select which Game of Thrones character lives, dies or becomes a wight by the end of season 8
+            </p>
+          </Message>
+        </Section>
+
         <Button primary size="massive" as={Link} to="/place">
           Place your bets.
         </Button>

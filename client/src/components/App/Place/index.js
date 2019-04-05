@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
-import { Button, Header, Form, Table, Container } from 'semantic-ui-react';
+import { Button, Header, Form, Table, Container, Message } from 'semantic-ui-react';
 import { Formik, Form as FormikForm } from 'formik';
 import { Helmet } from 'react-helmet';
 import debounce from 'debounce-promise';
+import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
 import client from 'client';
@@ -77,30 +78,48 @@ function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
       <Header>Your Details</Header>
 
       <Form.Field>
-        <Input fast required placeholder="Enter your name" name="name" />
+        <Input fast required placeholder="Enter your username" name="name" />
         <FormFieldErrorMessage name="name" />
       </Form.Field>
 
       <Form.Field>
         <Input fast placeholder="Enter your email" name="email" type="email" />
         <FormFieldErrorMessage name="email" />
+        <Message info>
+          Email is optional. We use only to list your Gravatar (if you have one) against the
+          list of <Link to="/bets">bets</Link> and it is not exposed in our graphQL server.
+        </Message>
       </Form.Field>
 
       <Form.Field>
         <Input fast placeholder="Enter your url" name="nameUrl" />
         <FormFieldErrorMessage name="nameUrl" />
+        <Message info>
+          Want us to link to your site? Go for it!!
+        </Message>
       </Form.Field>
 
       <Form.Field>
         <Input fast placeholder="Select your company" name="company" list="companies" />
         <CompaniesList />
+        <Message info>
+          Want to play with your colleques? Add your company name here and we'll group your colleques
+          under the same company.
+        </Message>
         <FormFieldErrorMessage name="company" />
       </Form.Field>
 
       <Form.Field>
         <Input fast placeholder="Enter your company's Url" name="companyUrl" />
         <FormFieldErrorMessage name="companyUrl" />
+        <Message info>
+          Want us to link to your company's site? Go for it!!
+        </Message>
       </Form.Field>
+
+      <Message>
+        Select which Game of Thrones character lives, dies or becomes a wight by the end of season 8
+      </Message>
 
       <YourBet />
 
@@ -157,7 +176,7 @@ const validationSchema = yup.object({
     .default('')
     .test(
       'valid_chars',
-      '${value} is not a valid name. Only letter and _ are allowed', // eslint-disable-line
+      '${value} is not a valid name. Only letters and _ are allowed', // eslint-disable-line
       value => !(_.isNull(value.match(/^[A-Za-z_]+$/)))
     )
     .test(
