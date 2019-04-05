@@ -86,8 +86,8 @@ function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
         <Input fast placeholder="Enter your email" name="email" type="email" />
         <FormFieldErrorMessage name="email" />
         <Message info>
-          Email is optional. We use only to list your Gravatar (if you have one) against the
-          list of <Link to="/bets">bets</Link> and it is not exposed in our graphQL server.
+          Email is optional. We use only use it to show your Gravatar (if you have one) against the
+          list of <Link to="/bets">bets</Link>. Your email is not exposed in our graphQL server.
         </Message>
       </Form.Field>
 
@@ -103,7 +103,7 @@ function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
         <Input fast placeholder="Select your company" name="company" list="companies" />
         <CompaniesList />
         <Message info>
-          Want to play with your colleques? Add your company name here and we'll group your colleques
+          Want to play along with your colleagues? Add your company name here and we'll group your colleagues
           under the same company.
         </Message>
         <FormFieldErrorMessage name="company" />
@@ -123,7 +123,7 @@ function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
 
       <YourBet />
 
-      <Button primary disabled={isSubmitting} loading={isSubmitting} onClick={submitForm}>Post</Button>
+      <Button primary disabled={isSubmitting} loading={isSubmitting} onClick={submitForm}>Place My Bet!!</Button>
     </Form>
   );
 
@@ -147,8 +147,8 @@ function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Character</Table.HeaderCell>
-            <Table.HeaderCell textAlign="center">Alive</Table.HeaderCell>
-            <Table.HeaderCell textAlign="center">Dead</Table.HeaderCell>
+            <Table.HeaderCell textAlign="center">Lives</Table.HeaderCell>
+            <Table.HeaderCell textAlign="center">Dies</Table.HeaderCell>
             <Table.HeaderCell textAlign="center">Becomes a wight</Table.HeaderCell>
           </Table.Row>
         </Table.Header>

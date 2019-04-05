@@ -6,19 +6,19 @@ export default function About() {
     <Container className="view-page">
       <Header>What's this About??</Header>
 
-      <Segment placeholder size="large">
+      <Segment placeholder size="big">
         <p>
           GoT Bet is a fun little site that lets you place *bets on who lives, who dies and who wights
           in the last season of Game of Thrones.
         </p>
 
         <p>
-          The source code for this site is <a href="https://github.com/nazar/git.bet">here</a> and is
-          released to the public domain.
+          The source code for this site is <a href="https://github.com/nazar/got.bet">here</a> and is
+          released to the public domain and is built with React, Express, graphQL and a ❤️ for code.
         </p>
 
         <p>
-          * no real money is involved; this is for funzies only.
+          <i>* no money is involved; this is for funzies only.</i>
         </p>
       </Segment>
     </Container>

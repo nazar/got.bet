@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Container, Table } from 'semantic-ui-react';
+import { Container, Table, Transition } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import useQuery from 'hooks/useQuery';
@@ -31,14 +31,16 @@ export default function List() {
           </Table.Header>
 
           <Table.Body>
-            {_.map(users, user => (
-              <Table.Row key={`${user.id}`}>
-                <Table.Cell collapsing><Avatar user={user} /></Table.Cell>
-                <Table.Cell><Link to={`/bets/${user.name}`}>{user.name}</Link></Table.Cell>
-                <Table.Cell><Company user={user} /></Table.Cell>
-                <Table.Cell><TimeAgo date={user.createdAt} /></Table.Cell>
-              </Table.Row>
-            ))}
+            <Transition.Group>
+              {_.map(users, user => (
+                <Table.Row key={`${user.id}`}>
+                  <Table.Cell collapsing><Avatar user={user} /></Table.Cell>
+                  <Table.Cell><Link to={`/bets/${user.name}`}>{user.name}</Link></Table.Cell>
+                  <Table.Cell><Company user={user} /></Table.Cell>
+                  <Table.Cell><TimeAgo date={user.createdAt} /></Table.Cell>
+                </Table.Row>
+              ))}
+            </Transition.Group>
           </Table.Body>
         </Table>
       </Section>

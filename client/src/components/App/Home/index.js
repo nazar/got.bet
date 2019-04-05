@@ -12,21 +12,24 @@ export default function Home() {
       <Section inverted placeholder padded="very" basic={false} className="hero">
         <Header as="h1" textAlign="center">Game of Thrones</Header>
         <Header as="h2" textAlign="center">Who Lives? Who Dies? Who Wights?</Header>
+
+        <Button primary size="massive" as={Link} to="/place" style={{ marginTop: 40 }}>
+          Place your bets.
+        </Button>
       </Section>
 
       <Section placeholder textAlign="center">
         <Section size="big">
           <Message compact>
-            <Message.Header>This is a simple game</Message.Header>
+            <Message.Header>The Game is simple</Message.Header>
             <p>
-              Select which Game of Thrones character lives, dies or becomes a wight by the end of season 8
+              Select which Game of Thrones characters live, die or become wights by the end of season 8
+            </p>
+            <p>
+              She or he who predicts the most wins (<i>nothing</i>)
             </p>
           </Message>
         </Section>
-
-        <Button primary size="massive" as={Link} to="/place">
-          Place your bets.
-        </Button>
       </Section>
     </div>
   );
