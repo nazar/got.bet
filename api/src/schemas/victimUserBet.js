@@ -1,3 +1,5 @@
+import { resolve } from 'bluebird';
+
 import getBetsForUserByUsername from 'services/victimUserBet/getBetsForUserByUsername';
 import placeYourBet from 'services/victimUserBet/placeYourBet';
 
@@ -48,13 +50,13 @@ export const victimUserBetTypeDefs = `
 
 export const victimUserBetResolvers = {
   VictimUserBet: {
-    user: (victimUserBet, vars, context) => context.loaders.usersById.load(victimUserBet.userId),
-    victim: (victimUserBet, vars, context) => context.loaders.victimsById.load(victimUserBet.victimId)
+    user: async (victimUserBet, vars, context) => context.loaders.usersById.load(victimUserBet.userId),
+    victim: async (victimUserBet, vars, context) => context.loaders.victimsById.load(victimUserBet.victimId)
   },
   Query: {
-    victimsBetForUser: (obj, { username }) => getBetsForUserByUsername({ username })
+    victimsBetForUser: async (obj, { username }) => resolve(getBetsForUserByUsername({ username }))
   },
   Mutation: {
-    placeYourBet: (obj, { bet }) => placeYourBet({ bet })
+    placeYourBet: async (obj, { bet }) => resolve(placeYourBet({ bet }))
   }
 };

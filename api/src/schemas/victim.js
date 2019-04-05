@@ -35,6 +35,6 @@ export const victimTypeDefs = `
 
 export const victimResolvers = {
   Query: {
-    victims: (obj, obj2, context) => Victim.query().orderBy('createdAt', 'desc'),
+    victims: async () => Victim.query().orderBy('createdAt', 'desc')
   }
 };

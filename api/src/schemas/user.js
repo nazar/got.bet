@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { resolve } from 'bluebird';
 import md5 from 'md5';
 
 import User from 'models/user';
@@ -7,7 +8,7 @@ import getUsers from 'services/user/getUsers';
 export const userTypeDefs = `
   extend type Query {
     # get user
-    userByName(name: String!): User!
+    userByName(name: String!): User
     
     # get users
     users(search: SearchInput, page: PaginationInput): [User!]
@@ -45,8 +46,8 @@ export const userTypeDefs = `
 
 export const userResolvers = {
   User: {
-    company: (user, vars, context) => user.companyId && context.loaders.companiesById.load(user.companyId),
-    gravatarHash: (user) => {
+    company: async (user, vars, context) => user.companyId && context.loaders.companiesById.load(user.companyId),
+    gravatarHash: async (user) => {
       if (user.email) {
         const email = (user.email || '').trim().toLowerCase();
         return md5(email, { encoding: 'binary' });
@@ -54,12 +55,12 @@ export const userResolvers = {
     }
   },
   Query: {
-    userByName: (obj, { name }) => User.query().where({ name }).first(),
+    userByName: async (obj, { name }) => User.query().where({ name }).first(),
 
     users: (obj, { search: { companyId, name } = {}, page: { limit, offset } = {} }) =>
-      getUsers({ companyId, name, limit, offset }),
+      resolve(getUsers({ companyId, name, limit, offset })),
 
-    validName: (obj, { name }) => User.query()
+    validName: async (obj, { name }) => User.query()
       .where({ name })
       .limit(1)
       .then(v => _.isEmpty(v))

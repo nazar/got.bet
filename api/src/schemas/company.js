@@ -20,6 +20,6 @@ export const companyTypeDefs = `
 
 export const companyResolvers = {
   Query: {
-    companies: (obj, { page: { limit, offset } = {} }) => getCompanies({ limit, offset }),
+    companies: async (obj, { page: { limit, offset } = {} }) => getCompanies({ limit, offset }),
   }
 };
