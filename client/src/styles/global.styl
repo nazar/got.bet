@@ -1,0 +1,16 @@
+.container
+  &.ui.view-page
+    padding-top $view-top-padding
+    padding-bottom $view-bottom-padding
+
+  &.ui.full-height
+    height 'calc(100vh - %s)' % $navbar-height
+
+  &.ui.top-heavy
+    margin-top -100px
+
+.table.ui
+  tr
+    &.visible.transition
+      display table-row !important
+

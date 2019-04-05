@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "camelcase": [0]
+  },
+  "parser": "babel-eslint"
+}

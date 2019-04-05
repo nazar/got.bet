@@ -1,0 +1,9 @@
+node_modules
+.idea
+.docker-sync
+
+// local dev override files
+docker-compose.override.yml
+
+// auto generated dev files
+schema.graphql

@@ -1,0 +1,15 @@
+{
+  "database": {
+    "pool": {
+      "min": 1,
+      "max": 7
+    },
+    "searchPath": "public"
+  },
+  "logging": {
+    "console": true
+  },
+  "graphql": {
+    "playground": false
+  }
+}

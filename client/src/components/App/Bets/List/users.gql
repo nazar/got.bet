@@ -1,0 +1,14 @@
+query users {
+  users {
+    id
+    name
+    url
+    gravatarHash
+    createdAt
+
+    company {
+      name
+      url
+    }
+  }
+}

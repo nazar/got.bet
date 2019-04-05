@@ -1,0 +1,19 @@
+{
+  "name": "database",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "migrate:make": "knex migrate:make",
+    "migrate:latest": "knex migrate:latest",
+    "migrate:rollback": "knex migrate:rollback"
+  },
+  "author": "Nazar Aziz",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "3.5.3",
+    "config": "2.0.1",
+    "knex": "0.15.2",
+    "lodash": "4.17.11",
+    "pg": "7.5.0"
+  }
+}

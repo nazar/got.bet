@@ -1,0 +1,7 @@
+mutation placeYourBet($bet: BetInput!) {
+  placeYourBet(bet: $bet) {
+    user {
+      name
+    }
+  }
+}

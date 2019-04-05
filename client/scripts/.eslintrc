@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "comma-dangle": 0,
+    "strict": 0,
+    "quotes": 0
+  }
+}

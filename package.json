@@ -1,0 +1,20 @@
+{
+  "name": "got.bet",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Nazar Aziz <mcnazar@gmail.com>",
+  "workspaces": [
+    "api",
+    "client",
+    "database"
+  ],
+  "scripts": {
+    "db:migrate": "yarn workspace database run migrate:latest",
+    "db:migrate:make": "yarn workspace database run migrate:make",
+    "db:migrate:rollback": "yarn workspace database run migrate:rollback",
+
+    "test:api": "docker-compose exec api yarn test",
+
+    "lint:client": "yarn workspace client-web run lint"
+  }
+}

@@ -1,0 +1,12 @@
+# ignore node_modules in folders
+node_modules
+**/node_modules
+
+# ignore some client cra files
+client/config
+client/build
+client/dev
+
+# and the api
+api/build
+api/dev

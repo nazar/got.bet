@@ -1,0 +1,3 @@
+query validName($name: String!) {
+  validName(name: $name)
+}

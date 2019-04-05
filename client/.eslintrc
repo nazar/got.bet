@@ -1,0 +1,73 @@
+{
+  "rules": {
+    // LOL no
+    "function-paren-newline": [0],
+    // needed overrides
+    "no-underscore-dangle": [0],
+
+    // disabled - disagree with airbnb
+    "space-before-function-paren": [0],
+    "consistent-return": [0],
+
+    // disabled - makes debugging more difficult
+    "arrow-body-style": [0],
+
+    // IMHO, more sensible overrides to existing airbnb error definitions
+    "max-len": [2, 120, 4, { "ignoreComments": true, "ignoreUrls": true }],
+    "comma-dangle": [2, "never"],
+    "no-multi-spaces": [2, { "exceptions": { "VariableDeclarator": true, "Property": true }, "ignoreEOLComments": true }],
+    "no-unused-expressions": [2, { "allowShortCircuit": true, "allowTernary": true }],
+    "no-use-before-define": [2, { "variables": false, "functions": false }],
+    "no-param-reassign": [2, { "props": false }],
+    "no-cond-assign": [2, "except-parens"],
+    "no-return-assign": [2, "except-parens"],
+    "no-else-return": [0],
+    "func-names": [0],
+    "no-void": [0],
+    "no-bitwise": [0], //really?
+
+    "import/no-cycle": [0], //disable for now but revisit when time permits
+
+    "quotes": [2, "single"],
+    "semi": 1,     // come on! Gotta have ; set it to warn(1) otherwise react stops rendering
+    "object-curly-spacing": [1, "always"],
+    "object-curly-newline": [0],
+
+    "react/no-access-state-in-setstate": "error",
+    "react/jsx-filename-extension": [0],
+    "react/jsx-one-expression-per-line": [0],
+    "react/prop-types": [0],
+    "react/sort-comp": [0],
+    "react/no-danger": [0], //sorry, but I need to render HTML
+    "react/no-multi-comp": [0], // prevent class file explosion
+    "react/forbid-prop-types": [0], //WAT, no array prop types? :facepalm:
+    "react/no-unescaped-entities": [0], //ott
+
+    "jsx-a11y/label-has-associated-control": [0],
+    "jsx-a11y/label-has-for": [0],
+    "jsx-a11y/anchor-is-valid": [0],
+    "jsx-a11y/click-events-have-key-events": [0],
+
+    "react-hooks/rules-of-hooks": "error"
+  },
+  "globals": {
+    "localStorage": true,
+    "document": true
+  },
+  "plugins": [
+    "react-hooks",
+    "import"
+  ],
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": [
+          "node_modules",
+          "./src"
+        ]
+      }
+    }
+  }
+}

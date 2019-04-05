@@ -1,0 +1,21 @@
+version: "2"
+
+syncs:
+  gb-sync-client:
+    src: './client'
+    sync_excludes_type: 'none'
+    sync_strategy: 'native_osx'
+    sync_excludes: ['Name node_modules']
+    notify_terminal: true
+    monit_enable: true
+
+  gb-sync-api:
+    src: './api'
+    sync_excludes_type: 'none'
+    sync_strategy: 'native_osx'
+    sync_excludes: ['Name node_modules']
+    notify_terminal: true
+    monit_enable: true
+
+
+

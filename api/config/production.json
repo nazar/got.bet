@@ -1,0 +1,13 @@
+{
+  "graphql": {
+    "playground": false
+  },
+  "logging": {
+    "console": false,
+    "file": "application.log",
+    "folder": "./logs"
+  },
+  "redis": {
+    "host": "localhost"
+  }
+}
