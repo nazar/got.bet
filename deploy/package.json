@@ -6,9 +6,7 @@
     "node": ">=10.15"
   },
   "scripts": {
-    "start": "webpack --config ./webpack.dev.js --watch & nodemon -L --watch dev --watch config dev/index.js & wait",
-    "copy:config": "cp package.json dist && cp yarn.lock dist && cp -r config dist",
-    "build": "rm -rf dist/* && webpack --config ./webpack.prod.js && yarn copy:config"
+    "deploy:production": "shipit production deploy-local"
   },
   "author": "Nazar Aziz <mcnazar@gmail.com>",
   "license": "ISC",

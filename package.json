@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "db:migrate": "yarn workspace database run migrate:latest",
+    "db:migrate:production": "NODE_ENV=production yarn workspace database run migrate:latest | ssh -i deploy/keys/production -L 5432:localhost:5432 gotbet@got.bet cat",
     "db:migrate:make": "yarn workspace database run migrate:make",
     "db:migrate:rollback": "yarn workspace database run migrate:rollback",
 
@@ -26,7 +27,10 @@
     "build:client": "yarn docker:run client yarn build && yarn docker:stop client",
     "build:all": "yarn build:api && yarn build:client",
 
+    "copy:config": "cp ./deploy/config/api/local-production.json ./deploy/build/api/config/",
     "build": "yarn docker:build:all && yarn build:all && yarn copy:config",
-    "copy:config": "cp ./deploy/config/api/local-production.json ./deploy/build/api/config/"
+
+
+    "deploy": "yarn build && yarn workspace deploy run deploy:production && yarn db:migrate:production"
   }
 }

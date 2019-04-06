@@ -7,7 +7,8 @@
     "searchPath": "public"
   },
   "logging": {
-    "console": true
+    "console": true,
+    "level": "sql"
   },
   "graphql": {
     "playground": false

@@ -15,7 +15,7 @@ module.exports = function ( gruntOrShipit ) {
             );
 
             await shipit.remote(
-                'ln -s /var/www/gotbet/shared/logs ' + shipit.releasePath + '/logs'
+                'ln -s /var/www/gotbet/shared/logs ' + shipit.releasePath + '/api/logs'
             );
         }
 

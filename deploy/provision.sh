@@ -2,17 +2,18 @@ apt-get update -y
 
 # install esentials
 
-apt-get install -y rsync
+apt-get install -y rsync curl
 
 
 # install passenger
 
-apt-get install -y dirmngr gnupg curl gcc g++ make
+apt-get install -y dirmngr gnupg
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
 apt-get install -y apt-transport-https ca-certificates
 sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger stretch main > /etc/apt/sources.list.d/passenger.list'
 apt-get update
-apt-get install -y libnginx-mod-http-passenger
+apt-get install -y nginx-extras passenger
+
 if [ ! -f /etc/nginx/modules-enabled/50-mod-http-passenger.conf ]; then ln -s /usr/share/nginx/modules-available/mod-http-passenger.load /etc/nginx/modules-enabled/50-mod-http-passenger.conf ; fi
 ls /etc/nginx/conf.d/mod-http-passenger.conf
 
@@ -39,4 +40,9 @@ apt-get install -y postgresql-11
 apt install -y redis-server
 
 # create the gotbet user
-adduser gotbet
+adduser --disabled-password --gecos "" gotbet
+
+# now the gotbet user and database
+runuser -l postgres -c 'createuser gotbet'
+runuser -l postgres -c 'createdb -O gotbet gotbet'
+echo "alter user gotbet with encrypted password 'ichangedthepasswordordidi';" | runuser -l postgres -c 'psql'

@@ -13,7 +13,8 @@ import playersQuery from './victims.gql';
 
 export default function Players() {
   const { loading, data: { victims } } = useQuery({
-    query: playersQuery
+    query: playersQuery,
+    fetchPolicy: 'network-only'
   });
 
   return (

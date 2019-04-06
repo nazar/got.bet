@@ -44,7 +44,7 @@ if (config.has('logging.file') && config.has('logging.folder')) {
   transports.push(new (winston.transports.File)({
     filename: path.join(logFolder, config.get('logging.file')),
     name: 'errorsFile',
-    level: config.get('logging:level') || 'sql',
+    level: config.get('logging.level') || 'sql',
     timestamp: true,
     handleExceptions: true,
     json: false,
