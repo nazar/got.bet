@@ -14,7 +14,8 @@ import usersQuery from './users.gql';
 
 export default function List() {
   const { loading, data: { users } } = useQuery({
-    query: usersQuery
+    query: usersQuery,
+    fetchPolicy: 'network-only'
   });
 
   return (

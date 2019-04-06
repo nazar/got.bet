@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import client from 'client';
 import { cachedQuery } from 'services/apollo';
 
-export default function useQuery({ query, variables }) {
+export default function useQuery({ query, variables, ...rest }) {
   const data = cachedQuery({ query, variables });
 
   const [queryResult, setQueryResult] = useState({
@@ -18,7 +18,8 @@ export default function useQuery({ query, variables }) {
   useEffect(() => {
     client.query({
       query,
-      variables
+      variables,
+      ...rest
     })
       .then(res => setQueryResult(res));
   }, [watchKey]);

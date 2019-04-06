@@ -56,7 +56,8 @@ export default function PlaceYourBet({ history }) {
     return client
       .mutate({
         mutation: placeYourbetMutation,
-        variables: { bet: payload }
+        variables: { bet: payload },
+        refetchQueries: ['users']
       })
       .then(({ data: { placeYourBet } }) => history.push(`/bets/${placeYourBet[0].user.name}`))
       .catch(() => setSubmitting(false));

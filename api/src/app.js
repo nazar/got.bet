@@ -55,9 +55,6 @@ export const apolloServer = new ApolloServer({
   formatError: (error) => {
     logger.error('graphQL Error:', util.inspect(error, { depth: 10 }));
     return error;
-  },
-  subscriptions: {
-    path: '/api/graphql/subscriptions'
   }
 });
 

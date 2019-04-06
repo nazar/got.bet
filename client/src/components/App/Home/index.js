@@ -24,7 +24,8 @@ export default function Home() {
           <Message compact>
             <Message.Header>The Game is simple</Message.Header>
             <p>
-              Select which Game of Thrones characters live, die or become wights by the end of season 8
+              Select which Game of Thrones characters live, die or become wights by the end of season 8.
+              Once a character dies or wights then they will be removed from the betting.
             </p>
             <p>
               She or he who predicts the most deaths and wights <Nothing plural />
