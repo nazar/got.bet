@@ -1,0 +1,5 @@
+query usersSummary {
+  usersSummary {
+    count
+  }
+}

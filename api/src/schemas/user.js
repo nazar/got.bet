@@ -4,6 +4,7 @@ import md5 from 'md5';
 
 import User from 'models/user';
 import getUsers from 'services/user/getUsers';
+import getUsersSummary from 'services/user/getUsersSummary';
 
 export const userTypeDefs = `
   extend type Query {
@@ -12,6 +13,7 @@ export const userTypeDefs = `
     
     # get users
     users(search: SearchInput, page: PaginationInput): [User!]
+    usersSummary(search: SearchInput): ListsSummary
     
     # check name validity, specifically if the username is taken 
     validName(name: String!): Boolean!
@@ -57,8 +59,10 @@ export const userResolvers = {
   Query: {
     userByName: async (obj, { name }) => User.query().where({ name }).first(),
 
-    users: (obj, { search: { companyId, name } = {}, page: { limit, offset } = {} }) =>
-      resolve(getUsers({ companyId, name, limit, offset })),
+    users: (obj, { search, page }) =>
+      resolve(getUsers({ search, page })),
+
+    usersSummary: (obj, { search }) => resolve(getUsersSummary({ search })),
 
     validName: async (obj, { name }) => User.query()
       .where({ name })

@@ -32,10 +32,14 @@ const Query = `
 // common definitions
 
 const common = `
-input PaginationInput {
-  offset: Int
-  limit: Int
-}
+  type ListsSummary {
+    count: Int!
+  }
+  
+  input PaginationInput {
+    offset: Int
+    limit: Int
+  }
 `;
 
 const ScalerResolvers = {

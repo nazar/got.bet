@@ -1,5 +1,5 @@
-query users {
-  users {
+query users($page: PaginationInput) {
+  users(page: $page) {
     id
     name
     url
