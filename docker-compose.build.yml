@@ -1,0 +1,23 @@
+version: '3'
+services:
+  # The React Client
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile-dev
+    volumes:
+      - /app/node_modules/
+      - ./client:/app
+      - ./deploy/build/client:/app/build
+    depends_on:
+      - api
+
+  # the API server
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile-dev
+    volumes:
+      - /app/node_modules/
+      - ./api:/app
+      - ./deploy/build/api:/app/dist

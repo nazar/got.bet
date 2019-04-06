@@ -2,13 +2,7 @@
   "database": {
     "connection": "postgresql://postgres:docker@db:5432/gotbet"
   },
-  "jwt": {
-    "secret": "supah-sekret"
-  },
   "graphql": {
     "playground": true
-  },
-  "redis": {
-    "host": "redis"
   }
 }

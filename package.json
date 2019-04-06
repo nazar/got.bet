@@ -5,6 +5,7 @@
   "author": "Nazar Aziz <mcnazar@gmail.com>",
   "workspaces": [
     "api",
+    "deploy",
     "client",
     "database"
   ],
@@ -13,17 +14,19 @@
     "db:migrate:make": "yarn workspace database run migrate:make",
     "db:migrate:rollback": "yarn workspace database run migrate:rollback",
 
-    "docker:build": "docker-compose build",
+    "docker:compose": "docker-compose -f docker-compose.build.yml -p gotbet_deploy",
+    "docker:build": "yarn docker:compose build",
     "docker:build:api": "yarn docker:build api",
     "docker:build:client": "yarn docker:build client",
     "docker:build:all": "yarn docker:build:api && yarn docker:build:client",
 
-    "docker:run": "docker-compose run --rm --no-deps",
-    "docker:stop": "docker-compose stop",
-    "build:api": "yarn docker:run -v $(pwd)/delpoy/build/api:/app/dist api yarn build && yarn docker:stop api",
-    "build:client": "yarn docker:run -v $(pwd)/deploy/build/client:/app/build client yarn build && yarn docker:stop client",
+    "docker:run": "yarn docker:compose run --rm",
+    "docker:stop": "yarn docker:compose stop",
+    "build:api": "yarn docker:run api yarn build && yarn docker:stop api",
+    "build:client": "yarn docker:run client yarn build && yarn docker:stop client",
     "build:all": "yarn build:api && yarn build:client",
-    "build": "yarn docker:build:all && yarn build:all"
 
+    "build": "yarn docker:build:all && yarn build:all && yarn copy:config",
+    "copy:config": "cp ./deploy/config/api/local-production.json ./deploy/build/api/config/"
   }
 }

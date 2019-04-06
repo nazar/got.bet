@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "webpack --config ./webpack.dev.js --watch & nodemon -L --watch dev --watch config dev/index.js & wait",
-    "build": "rm -rf dist/* && webpack --config ./webpack.prod.js"
+    "copy:config": "cp -r config dist && cp package.json dist && cp yarn.lock dist",
+    "build": "rm -rf dist/* && webpack --config ./webpack.prod.js && yarn copy:config"
   },
   "author": "Nazar Aziz <mcnazar@gmail.com>",
   "license": "ISC",
