@@ -2,12 +2,12 @@ const path = require('path');
 
 /* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 /* eslint-enable import/no-extraneous-dependencies */
 
 
 module.exports = {
+  mode: 'production',
   entry: './index.js',
   target: 'node',
   output: {
@@ -30,9 +30,6 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
-    }),
-    new UglifyJsPlugin({
-      sourceMap: true
     })
   ],
   resolve: {

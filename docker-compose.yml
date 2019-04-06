@@ -31,7 +31,6 @@ services:
       dockerfile: Dockerfile-dev
     depends_on:
     - db
-    - redis
     env_file:
     - ./.env-shared
     volumes:
@@ -45,12 +44,6 @@ services:
     environment:
     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-docker}
     - POSTGRES_DB=${POSTGRES_DB:-gotbet}
-
-  # local redis server for pubsub and caching
-  redis:
-    image: redis:5.0.2-alpine
-    ports: ["63796:6379"]
-
 
 volumes:
   gb-sync-client:

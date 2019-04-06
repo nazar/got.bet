@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "webpack --config ./webpack.dev.js --watch & nodemon -L --watch dev --watch config dev/index.js & wait",
-    "build": "rm -rf dist && webpack --config ./webpack.prod.js"
+    "build": "rm -rf dist/* && webpack --config ./webpack.prod.js"
   },
   "author": "Nazar Aziz <mcnazar@gmail.com>",
   "license": "ISC",
