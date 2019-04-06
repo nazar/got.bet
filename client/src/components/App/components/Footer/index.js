@@ -85,7 +85,7 @@ export default function Footer() {
     return (
       <FacebookShareButton
         url={url}
-        title={title}
+        quote={title}
         style={buttonStyle}
       >
         <FacebookIcon

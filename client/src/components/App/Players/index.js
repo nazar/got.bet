@@ -21,7 +21,7 @@ export default function Players() {
       <Section loading={loading}>
         <Card.Group>
           <Transition.Group>
-            {_.map(victims, victim => <Victim victim={victim} />)}
+            {_.map(victims, victim => <Victim victim={victim} key={victim.id} />)}
           </Transition.Group>
         </Card.Group>
       </Section>
@@ -30,9 +30,9 @@ export default function Players() {
 
   //
 
-  function Victim({ victim }) {
+  function Victim({ victim, ...rest }) {
     return (
-      <Card centered>
+      <Card centered {...rest}>
         <PlayerImage cover card player={victim} size="large" />
         <Card.Content>
           <Card.Header>{victim.name}</Card.Header>

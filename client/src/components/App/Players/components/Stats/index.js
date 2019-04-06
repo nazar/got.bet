@@ -18,15 +18,17 @@ export default function Stats({ victim }) {
   return (
     <div className="player-stats-table">
       <table>
-        {_.map(stats, stat => (
-          <tr key={stat.stat}>
-            <td className="collapsing">{stat.stat}</td>
-            <td className="bar-container" valign="middle">
-              <div className="bar" style={{ width: `${(stat.count / totalCounts) * 100}%` }}>&nbsp;</div>
-            </td>
-            <td className="collapsing">{stat.count}</td>
-          </tr>
-        ))}
+        <tbody>
+          {_.map(stats, stat => (
+            <tr key={stat.stat}>
+              <td className="collapsing">{stat.stat}</td>
+              <td className="bar-container">
+                <div className="bar" style={{ width: `${(stat.count / totalCounts) * 100}%` }}>&nbsp;</div>
+              </td>
+              <td className="collapsing">{stat.count}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
