@@ -76,6 +76,7 @@ const MenuItems = () => (
     <Menu.Item as={NavLink} name="Home" exact to="/" />
     <Menu.Item as={NavLink} name="Place your Bet" to="/place" />
     <Menu.Item as={NavLink} name="GOT Bets" to="/bets" />
+    <Menu.Item as={NavLink} name="The Players" to="/players" />
     <Menu.Item as={NavLink} name="About GOT Bets" to="/about" />
   </React.Fragment>
 );

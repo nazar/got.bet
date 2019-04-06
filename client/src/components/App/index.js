@@ -6,6 +6,7 @@ import About from 'components/App/About';
 import Bets from 'components/App/Bets';
 import Home from 'components/App/Home';
 import Place from 'components/App/Place';
+import Players from 'components/App/Players';
 
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
@@ -26,6 +27,7 @@ export default function App() {
           <Switch>
             <Route path="/place" component={Place} />
             <Route path="/bets" component={Bets} />
+            <Route path="/players" component={Players} />
             <Route path="/about" component={About} />
             <Route exact path="/" component={Home} />
           </Switch>

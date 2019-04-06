@@ -3,6 +3,8 @@ import React from 'react';
 import { Container, Header, Table, Icon, Transition } from 'semantic-ui-react';
 
 import Section from 'components/shared/Section';
+import PlayerImage from 'components/shared/PlayerImage';
+
 import useQuery from 'hooks/useQuery';
 
 import getBetQuery from './getBet.gql';
@@ -24,6 +26,7 @@ export default function Bet({ match: { params: { username } } }) {
             <Table>
               <Table.Header>
                 <Table.Row>
+                  <Table.HeaderCell>&nbsp;</Table.HeaderCell>
                   <Table.HeaderCell>Character</Table.HeaderCell>
                   <Table.HeaderCell textAlign="center">Lives</Table.HeaderCell>
                   <Table.HeaderCell textAlign="center">Dies</Table.HeaderCell>
@@ -36,6 +39,7 @@ export default function Bet({ match: { params: { username } } }) {
                 <Transition.Group>
                   {_.map(victimsBetForUser, victimBet => (
                     <Table.Row key={`bet:${victimBet.id}`}>
+                      <Table.Cell collapsing><PlayerImage avatar popup player={victimBet.victim} /></Table.Cell>
                       <Table.Cell>{victimBet.victim.name}</Table.Cell>
                       <Table.Cell textAlign="center"><Selection victimBet={victimBet} value="alive" /></Table.Cell>
                       <Table.Cell textAlign="center"><Selection victimBet={victimBet} value="dead" /></Table.Cell>

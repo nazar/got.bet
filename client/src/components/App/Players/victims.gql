@@ -1,0 +1,8 @@
+query {
+  victims {
+    id
+    name
+    status
+    displayOrder
+  }
+}

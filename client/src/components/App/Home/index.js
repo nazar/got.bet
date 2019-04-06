@@ -3,6 +3,7 @@ import { Header, Button, Message } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import Section from 'components/shared/Section';
+import Nothing from 'components/shared/Nothing';
 
 import './home.styl';
 
@@ -26,7 +27,7 @@ export default function Home() {
               Select which Game of Thrones characters live, die or become wights by the end of season 8
             </p>
             <p>
-              She or he who predicts the most wins (<i>nothing</i>)
+              She or he who predicts the most <Nothing plural />.
             </p>
           </Message>
         </Section>
