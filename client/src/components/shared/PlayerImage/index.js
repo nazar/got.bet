@@ -34,14 +34,15 @@ import './playerImage.styl';
 
 export default function PlayerImage({ player, popup, cover, card, ...rest }) {
   const src = imageMap[player.name];
+  const className = cx('player-image', { cover, card });
 
   if (popup) {
     return (
-      <PlayerPopup trigger={<Image src={src} {...rest} />} />
+      <PlayerPopup trigger={<Image className={className} src={src} {...rest} />} />
     );
   } else {
     return (
-      <Image className={cx('player-image', { cover, card })} src={src} {...rest} />
+      <Image className={className} src={src} {...rest} />
     );
   }
 

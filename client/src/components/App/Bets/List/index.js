@@ -27,6 +27,7 @@ export default function List() {
               <Table.HeaderCell>Name</Table.HeaderCell>
               <Table.HeaderCell>Company</Table.HeaderCell>
               <Table.HeaderCell>Bet</Table.HeaderCell>
+              <Table.HeaderCell>Score</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
@@ -38,6 +39,7 @@ export default function List() {
                   <Table.Cell><Link to={`/bets/${user.name}`}>{user.name}</Link></Table.Cell>
                   <Table.Cell><Company user={user} /></Table.Cell>
                   <Table.Cell><TimeAgo date={user.createdAt} /></Table.Cell>
+                  <Table.Cell>-</Table.Cell>
                 </Table.Row>
               ))}
             </Transition.Group>

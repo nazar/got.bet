@@ -14,7 +14,7 @@ export default function About() {
 
         <p>
           The source code for this site is <a href="https://github.com/nazar/got.bet">here</a> and is
-          released to the public domain and is built with React, Express, graphQL and a ❤️ for code.
+          released to the public domain and is built with React, Express, graphQL and a ❤️ for writing code.
         </p>
 
         <p>

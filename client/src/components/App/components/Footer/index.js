@@ -45,7 +45,7 @@ export default function Footer() {
       >
         <TwitterIcon
           round
-          size={20}
+          size={32}
         />
       </TwitterShareButton>
     );
@@ -60,7 +60,7 @@ export default function Footer() {
       >
         <RedditIcon
           round
-          size={20}
+          size={32}
         />
       </RedditShareButton>
     );
@@ -75,7 +75,7 @@ export default function Footer() {
       >
         <EmailIcon
           round
-          size={20}
+          size={32}
         />
       </EmailShareButton>
     );
@@ -90,7 +90,7 @@ export default function Footer() {
       >
         <FacebookIcon
           round
-          size={20}
+          size={32}
         />
       </FacebookShareButton>
     );

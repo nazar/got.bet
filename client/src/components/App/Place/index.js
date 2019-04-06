@@ -14,6 +14,7 @@ import Radio from 'components/shared/FormikFields/Radio';
 import FormFieldErrorMessage from 'components/shared/FormFieldErrorMessage';
 
 import useQuery from 'hooks/useQuery';
+import PlayerImage from '../../shared/PlayerImage';
 
 import companiesQuery from './queries/companies.gql';
 import validNameQuery from './queries/validName.gql';
@@ -146,6 +147,7 @@ function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
       <Table>
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell>&nbsp;</Table.HeaderCell>
             <Table.HeaderCell>Character</Table.HeaderCell>
             <Table.HeaderCell textAlign="center">Lives</Table.HeaderCell>
             <Table.HeaderCell textAlign="center">Dies</Table.HeaderCell>
@@ -156,6 +158,7 @@ function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
         <Table.Body>
           {_.map(values.bet, (bet, index) => (
             <Table.Row key={`bet:${bet.id}`}>
+              <Table.Cell collapsing><PlayerImage avatar popup cover player={bet} /></Table.Cell>
               <Table.Cell>{bet.name}</Table.Cell>
               <Table.Cell textAlign="center"><Radio name={`bet[${index}].status`} value="alive" /></Table.Cell>
               <Table.Cell textAlign="center"><Radio name={`bet[${index}].status`} value="dead" /></Table.Cell>
@@ -176,8 +179,8 @@ const validationSchema = yup.object({
     .default('')
     .test(
       'valid_chars',
-      '${value} is not a valid name. Only letters and _ are allowed', // eslint-disable-line
-      value => !(_.isNull(value.match(/^[A-Za-z_]+$/)))
+      '${value} is not a valid name. Only letters, spaces, - and _ are allowed', // eslint-disable-line
+      value => !(_.isNull(value.match(/^[A-Za-z_\-\s]+$/)))
     )
     .test(
       'exists',

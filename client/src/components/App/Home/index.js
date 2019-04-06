@@ -27,7 +27,7 @@ export default function Home() {
               Select which Game of Thrones characters live, die or become wights by the end of season 8
             </p>
             <p>
-              She or he who predicts the most <Nothing plural />.
+              She or he who predicts the most deaths and wights <Nothing plural />
             </p>
           </Message>
         </Section>

@@ -16,11 +16,14 @@ export const victimTypeDefs = `
     status: VictimStatus
     # display order - natural sorting
     displayOrder: Int!
+    # voting statistics
+    stats: VictimStats
   }
   
-  type UserToken {
-    token: String!
-    user: User
+  type VictimStats {
+    lives: Int
+    dies: Int
+    wights: Int
   }
   
   # enums
@@ -35,6 +38,6 @@ export const victimTypeDefs = `
 
 export const victimResolvers = {
   Query: {
-    victims: async () => Victim.query().orderBy('createdAt', 'desc')
+    victims: async () => Victim.query().orderBy('displayOrder', 'asc')
   }
 };

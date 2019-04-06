@@ -4,5 +4,11 @@ query {
     name
     status
     displayOrder
+
+    stats {
+      lives
+      dies
+      wights
+    }
   }
 }

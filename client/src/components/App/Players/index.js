@@ -1,11 +1,14 @@
 import _ from 'lodash';
 import React from 'react';
-import { Card, Container, Transition, Icon } from 'semantic-ui-react';
+import { Card, Container, Transition } from 'semantic-ui-react';
+
+import useQuery from 'hooks/useQuery';
 
 import PlayerImage from 'components/shared/PlayerImage';
 import Section from 'components/shared/Section';
 
-import useQuery from 'hooks/useQuery';
+import Stats from './components/Stats';
+
 import playersQuery from './victims.gql';
 
 export default function Players() {
@@ -29,16 +32,13 @@ export default function Players() {
 
   function Victim({ victim }) {
     return (
-      <Card>
+      <Card centered>
         <PlayerImage cover card player={victim} size="large" />
         <Card.Content>
           <Card.Header>{victim.name}</Card.Header>
         </Card.Content>
         <Card.Content extra>
-          <a>
-            <Icon name="user" />
-            10 Friends
-          </a>
+          <Stats victim={victim} />
         </Card.Content>
       </Card>
     );

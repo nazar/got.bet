@@ -58,7 +58,7 @@ export default function Bet({ match: { params: { username } } }) {
 
   function Selection({ value, victimBet: { status } }) {
     if (value === status) {
-      return <Icon name="times" />;
+      return <Icon name="circle" />;
     } else {
       return null;
     }
