@@ -76,7 +76,7 @@ export default function PlaceYourBet({ history }) {
 
 function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
   return (
-    <Form as={FormikForm}>
+    <Form as={FormikForm} autocomplete="off" >
       <Header>Your Details</Header>
 
       <Form.Field>

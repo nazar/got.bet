@@ -1,11 +1,16 @@
 import _ from 'lodash';
 import React from 'react';
-import { Container, Header, Table, Icon, Transition } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Container, Header, Table, Icon, Transition, List } from 'semantic-ui-react';
 
+import Company from 'components/shared/Company';
 import Section from 'components/shared/Section';
 import PlayerImage from 'components/shared/PlayerImage';
 
 import useQuery from 'hooks/useQuery';
+import Avatar from '../../../shared/Avatar';
+import LabelContent from '../../../shared/LabelContent';
+import TimeAgo from '../../../shared/TimeAgo';
 
 import getBetQuery from './getBet.gql';
 
@@ -21,7 +26,7 @@ export default function Bet({ match: { params: { username } } }) {
       <Section loading={loading}>
         {() => (
           <>
-            <Header>{userByName.name} Bet</Header>
+            <UserInformation />
 
             <Table unstackable>
               <Table.Header>
@@ -30,7 +35,7 @@ export default function Bet({ match: { params: { username } } }) {
                   <Table.HeaderCell>Character</Table.HeaderCell>
                   <Table.HeaderCell textAlign="center">Lives</Table.HeaderCell>
                   <Table.HeaderCell textAlign="center">Dies</Table.HeaderCell>
-                  <Table.HeaderCell textAlign="center">Wight</Table.HeaderCell>
+                  <Table.HeaderCell textAlign="center">Wights</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
 
@@ -53,6 +58,38 @@ export default function Bet({ match: { params: { username } } }) {
       </Section>
     </Container>
   );
+
+  function UserInformation() {
+    return (
+      <List verticalAlign="middle" className="mobile-list-item" key={`${userByName.id}`}>
+        <List.Item>
+          <Avatar user={userByName} />&nbsp;
+          <User />
+        </List.Item>
+        <List.Item>
+          <Company user={userByName} />
+        </List.Item>
+        <List.Item>
+          <LabelContent
+            label="Placed bet"
+            content={<TimeAgo noMargin plain date={userByName.createdAt} />}
+          />
+        </List.Item>
+      </List>
+    );
+
+    //
+
+    function User() {
+      const content = userByName.url
+        ? <a href={userByName.url} target="_blank" rel="noopener noreferrer">{userByName.name}</a>
+        : userByName.name;
+
+      return (
+        <strong>{content}</strong>
+      );
+    }
+  }
 
   function Selection({ value, victimBet: { status } }) {
     if (value === status) {

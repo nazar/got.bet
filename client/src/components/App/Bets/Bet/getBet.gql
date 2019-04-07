@@ -3,6 +3,7 @@ query getBet($username: String!) {
     name
     url
     gravatarHash
+    createdAt
 
     company {
       name

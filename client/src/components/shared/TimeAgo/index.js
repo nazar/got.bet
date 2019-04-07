@@ -6,7 +6,7 @@ import cx from 'classnames';
 
 import './timeAgo.styl';
 
-export default function TimeAgo({ date, render, plain }) {
+export default function TimeAgo({ date, render, plain, noMargin }) {
   if (date) {
     return <TimeAgoHasDate />;
   } else {
@@ -38,7 +38,7 @@ export default function TimeAgo({ date, render, plain }) {
     function TimeAgoContainer({ children }) {
       return (
         <Popup
-          trigger={<span className={cx('time-ago', { plain })}>{children}</span>}
+          trigger={<span className={cx('time-ago', { plain, noMargin })}>{children}</span>}
           content={format(parsedDate, 'Do MMMM YYYY h:mm a')}
         />
       );

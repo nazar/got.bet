@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import useMedia, { tabletUp } from 'hooks/useMedia';
 
 import Avatar from 'components/shared/Avatar';
+import Company from 'components/shared/Company';
+import LabelContent from 'components/shared/LabelContent';
 import Section from 'components/shared/Section';
 import TimeAgo from 'components/shared/TimeAgo';
 import UberPaginator from 'components/shared/UberPaginator';
@@ -92,29 +94,15 @@ export default function BetList() {
                 <Company label user={user} />
               </List.Item>
               <List.Item>
-                <strong>Bet</strong> <TimeAgo date={user.createdAt} />
+                <LabelContent
+                  label="Placed bet"
+                  content={<TimeAgo noMargin date={user.createdAt} />}
+                />
               </List.Item>
             </List>
           ))}
         </Transition.Group>
       </List.List>
     );
-  }
-
-  function Company({ user, label }) {
-    if (user.company) {
-      const company = user.company
-        ? <a href={user.company.url} target="_blank" rel="noopener noreferrer">{user.company.name}</a>
-        : user.company.name;
-
-      return (
-        <>
-          { label && <strong>Company </strong> }
-          {company}
-        </>
-      );
-    } else {
-      return null;
-    }
   }
 }
