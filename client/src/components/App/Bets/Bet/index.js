@@ -23,7 +23,7 @@ export default function Bet({ match: { params: { username } } }) {
           <>
             <Header>{userByName.name} Bet</Header>
 
-            <Table>
+            <Table unstackable>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>&nbsp;</Table.HeaderCell>
@@ -31,7 +31,6 @@ export default function Bet({ match: { params: { username } } }) {
                   <Table.HeaderCell textAlign="center">Lives</Table.HeaderCell>
                   <Table.HeaderCell textAlign="center">Dies</Table.HeaderCell>
                   <Table.HeaderCell textAlign="center">Wight</Table.HeaderCell>
-                  <Table.HeaderCell textAlign="center">Correct?</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
 
@@ -44,7 +43,6 @@ export default function Bet({ match: { params: { username } } }) {
                       <Table.Cell textAlign="center"><Selection victimBet={victimBet} value="alive" /></Table.Cell>
                       <Table.Cell textAlign="center"><Selection victimBet={victimBet} value="dead" /></Table.Cell>
                       <Table.Cell textAlign="center"><Selection victimBet={victimBet} value="wight" /></Table.Cell>
-                      <Table.Cell textAlign="center">&nbsp;</Table.Cell>
                     </Table.Row>
                   ))}
                 </Transition.Group>

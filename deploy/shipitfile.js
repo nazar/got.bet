@@ -12,7 +12,7 @@ module.exports = function ( shipit ) {
 
     production: {
       servers: [{
-        host: '192.168.178.58',
+        host: 'got.bet',
         user: 'gotbet'
       }],
       key: './keys/production'

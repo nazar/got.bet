@@ -145,14 +145,14 @@ function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
 
   function YourBet() {
     return (
-      <Table>
+      <Table unstackable>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>&nbsp;</Table.HeaderCell>
             <Table.HeaderCell>Character</Table.HeaderCell>
             <Table.HeaderCell textAlign="center">Lives</Table.HeaderCell>
             <Table.HeaderCell textAlign="center">Dies</Table.HeaderCell>
-            <Table.HeaderCell textAlign="center">Becomes a wight</Table.HeaderCell>
+            <Table.HeaderCell textAlign="center">Wights</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
