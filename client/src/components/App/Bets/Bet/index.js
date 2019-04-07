@@ -66,7 +66,7 @@ export default function Bet({ match: { params: { username } } }) {
           <User />
         </List.Item>
         <List.Item>
-          <Company user={userByName} />
+          <Company label user={userByName} />
         </List.Item>
         <List.Item>
           <LabelContent
