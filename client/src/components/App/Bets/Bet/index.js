@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Header, Table, Icon, Transition, List } from 'semantic-ui-react';
+import { Container, Table, Icon, Transition, List } from 'semantic-ui-react';
 
 import Company from 'components/shared/Company';
 import Section from 'components/shared/Section';
