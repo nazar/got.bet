@@ -42,7 +42,7 @@ export default function Bet({ match: { params: { username } } }) {
                 <Transition.Group>
                   {_.map(victimsBetForUser, victimBet => (
                     <Table.Row key={`bet:${victimBet.id}`}>
-                      <Table.Cell collapsing><PlayerImage avatar popup player={victimBet.victim} /></Table.Cell>
+                      <Table.Cell collapsing><PlayerImage avatar popup cover player={victimBet.victim} /></Table.Cell>
                       <Table.Cell>{victimBet.victim.name}</Table.Cell>
                       <Table.Cell textAlign="center"><Selection victimBet={victimBet} value="alive" /></Table.Cell>
                       <Table.Cell textAlign="center"><Selection victimBet={victimBet} value="dead" /></Table.Cell>
