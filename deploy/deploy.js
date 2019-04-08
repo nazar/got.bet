@@ -31,7 +31,9 @@ module.exports = function ( gruntOrShipit ) {
 
     utils.registerTask( shipit, 'reload:gotbet', async function () {
         await shipit.remote('mkdir -p ' + shipit.releasePath + '/api/tmp');
-        await shipit.remote('touch ' + shipit.releasePath + '/api/tmp/restart.txt')
+        await shipit.remote('touch ' + shipit.releasePath + '/api/tmp/restart.txt');
+        // cold start passenger process
+        await shipit.remote('curl http://got.bet > /dev/null');
     } );
 
     utils.registerTask( shipit, 'deploy-local', [
