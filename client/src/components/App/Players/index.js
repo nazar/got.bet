@@ -32,9 +32,17 @@ export default function Players() {
   //
 
   function Victim({ victim, ...rest }) {
+    const statusOverride = victim.name === 'The Mountain' ? 'Alive?' : null;
+
     return (
       <Card centered {...rest}>
-        <PlayerImage cover card player={victim} size="large" />
+        <PlayerImage
+          cover
+          card
+          player={victim}
+          size="large"
+          label={{ color: 'teal', content: _.capitalize(statusOverride || victim.status), ribbon: true }}
+        />
         <Card.Content>
           <Card.Header>{victim.name}</Card.Header>
         </Card.Content>
