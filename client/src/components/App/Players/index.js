@@ -1,29 +1,33 @@
 import _ from 'lodash';
-import React from 'react';
-import { Card, Container, Transition } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Card, Container } from 'semantic-ui-react';
 
 import useQuery from 'hooks/useQuery';
 
 import PlayerImage from 'components/shared/PlayerImage';
 import Section from 'components/shared/Section';
 
+import Sorter from './components/Sorter';
 import Stats from './components/Stats';
 
 import playersQuery from './victims.gql';
 
 export default function Players() {
+  const [sortOrder, setSortOrder] = useState('none');
+
   const { loading, data: { victims } } = useQuery({
     query: playersQuery,
     fetchPolicy: 'network-only'
   });
 
+  const sortedVictims = sort();
+
   return (
     <Container className="view-page">
       <Section loading={loading}>
+        <Sorter sortOrder={sortOrder} onSort={order => setSortOrder(order)} />
         <Card.Group>
-          <Transition.Group>
-            {_.map(victims, victim => <Victim victim={victim} key={victim.id} />)}
-          </Transition.Group>
+          {_.map(sortedVictims, victim => <Victim victim={victim} key={victim.id} />)}
         </Card.Group>
       </Section>
     </Container>
@@ -51,5 +55,15 @@ export default function Players() {
         </Card.Content>
       </Card>
     );
+  }
+
+  function sort() {
+    if (sortOrder === 'none') {
+      return victims;
+    } else {
+      const [field, direction] = _.split(sortOrder, ':');
+
+      return _.orderBy(victims, [`stats.${field}`], [direction]);
+    }
   }
 }
