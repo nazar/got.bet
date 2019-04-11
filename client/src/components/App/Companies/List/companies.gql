@@ -1,0 +1,12 @@
+query companies($page: PaginationInput) {
+  companies(page: $page) {
+    id
+    name
+    url
+    createdAt
+
+    stats {
+      users
+    }
+  }
+}

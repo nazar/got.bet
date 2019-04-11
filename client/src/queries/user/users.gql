@@ -1,0 +1,14 @@
+query users($search: SearchInput, $page: PaginationInput) {
+  users(search: $search, page: $page) {
+    id
+    name
+    url
+    gravatarHash
+    createdAt
+
+    company {
+      name
+      url
+    }
+  }
+}

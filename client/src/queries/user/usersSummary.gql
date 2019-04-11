@@ -1,0 +1,5 @@
+query usersSummary($search: SearchInput) {
+  usersSummary(search: $search) {
+    count
+  }
+}

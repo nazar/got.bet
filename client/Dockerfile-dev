@@ -1,12 +1,9 @@
 FROM node:10.15-alpine
 
-WORKDIR /tmp/packages
+WORKDIR /app
 COPY ./package.json ./yarn.lock ./
 RUN yarn install
 
-
-WORKDIR /app
-RUN cp -R /tmp/packages/node_modules .
 COPY . /app
 
 CMD yarn start

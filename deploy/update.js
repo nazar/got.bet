@@ -11,7 +11,6 @@ var Promise = require('bluebird');
  * - Set previous release.
  * - Set previous revision.
  * - Create and define release path.
- * - Copy previous release (for faster rsync)
  * - Set current revision and write REVISION file.
  * - Remote copy project.
  */
@@ -38,6 +37,7 @@ module.exports = function (gruntOrShipit) {
             shipit.releasePath = path.join(shipit.releasesPath, shipit.releaseDirname);
 
             shipit.log('Create release path "%s"', shipit.releasePath);
+
             return shipit.remote('mkdir -p ' + shipit.releasePath)
                 .then(function () {
                     shipit.log(chalk.green('Release path created.'));
@@ -52,6 +52,7 @@ module.exports = function (gruntOrShipit) {
             var uploadDirPath = path.resolve(shipit.config.workspace, shipit.config.dirToCopy || '');
 
             shipit.log('Copy project to remote servers.');
+
             return shipit.remoteCopy(uploadDirPath + '/', shipit.releasePath, {rsync: '--del'})
                 .then(function () {
                     shipit.log(chalk.green('Finished copy.'));

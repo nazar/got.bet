@@ -74,14 +74,14 @@ export default function PlaceYourBet({ history }) {
   }
 }
 
-function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
+function PlaceYourBetForm({ formik: { values, errors, submitForm, isSubmitting } }) {
   return (
-    <Form as={FormikForm} autocomplete="off">
+    <Form as={FormikForm} autoComplete="off">
       <Header>Your Details</Header>
 
       <Form.Field>
         <Input fast required placeholder="Enter your username" name="name" />
-        <FormFieldErrorMessage name="name" />
+        <FormFieldErrorMessage all name="name" />
       </Form.Field>
 
       <Form.Field>
@@ -108,7 +108,7 @@ function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
           Want to play along with your colleagues? Add your company name here and we'll group your colleagues
           under the same company.
         </Message>
-        <FormFieldErrorMessage name="company" />
+        <FormFieldErrorMessage all name="company" />
       </Form.Field>
 
       <Form.Field>
@@ -124,6 +124,12 @@ function PlaceYourBetForm({ formik: { values, submitForm, isSubmitting } }) {
       </Message>
 
       <YourBet />
+
+      {!(_.isEmpty(errors)) && (
+        <Message negative>
+          There are one more errors preventing this form from saving. Please scroll up to view the error messages.
+        </Message>
+      )}
 
       <Button primary disabled={isSubmitting} loading={isSubmitting} onClick={submitForm}>Place My Bet!!</Button>
     </Form>
@@ -190,7 +196,12 @@ const validationSchema = yup.object({
     ),
   email: yup.string().email(),
   nameUrl: yup.string().url().default(''),
-  company: yup.string().default(''),
+  company: yup.string().when('companyUrl', {
+    is: val => _.isEmpty(val),
+    then: yup.string(),
+    otherwise: yup.string().required('Company is required when company Url is present')
+  })
+    .default(''),
   companyUrl: yup.string().url().default(''),
 
   bet: yup.array().of(yup.object({

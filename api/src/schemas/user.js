@@ -40,7 +40,7 @@ export const userTypeDefs = `
   
   input SearchInput {
     # users by company
-    companyId: ID
+    company: String
     # users by name
     name: String
   }
@@ -59,8 +59,8 @@ export const userResolvers = {
   Query: {
     userByName: async (obj, { name }) => User.query().where({ name }).first(),
 
-    users: (obj, { search, page }) =>
-      resolve(getUsers({ search, page })),
+    users: (obj, { search, page: { limit = 20, offset } = {} } = {}) =>
+      resolve(getUsers({ search, page: { limit, offset } })),
 
     usersSummary: (obj, { search }) => resolve(getUsersSummary({ search })),
 

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import About from 'components/App/About';
+import Companies from 'components/App/Companies';
 import Bets from 'components/App/Bets';
 import Home from 'components/App/Home';
 import Place from 'components/App/Place';
@@ -27,6 +28,7 @@ export default function App() {
           <Switch>
             <Route path="/place" component={Place} />
             <Route path="/bets" component={Bets} />
+            <Route path="/companies" component={Companies} />
             <Route path="/players" component={Players} />
             <Route path="/about" component={About} />
             <Route exact path="/" component={Home} />

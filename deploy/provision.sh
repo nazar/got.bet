@@ -1,6 +1,6 @@
 apt-get update -y
 
-# install esentials
+# install essentials
 
 apt-get install -y rsync curl
 
