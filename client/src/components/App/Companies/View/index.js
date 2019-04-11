@@ -4,7 +4,6 @@ import UsersList from 'components/shared/UsersList';
 
 import usersQuery from 'queries/user/users.gql';
 import usersSummaryQuery from 'queries/user/usersSummary.gql';
-import { Link } from 'react-router-dom';
 
 
 export default function CompanyBetList({ match: { params: { company } } }) {

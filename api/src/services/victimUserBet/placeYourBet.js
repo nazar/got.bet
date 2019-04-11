@@ -21,6 +21,7 @@ export default function placeYourBet({ bet }) {
     .then(createCompany)
     .then(createUser)
     .then(placeBet)
+    .then(updateCompanyStats)
     .then(updateVictimStats)
     .then(() => trx.commit())
     .tapCatch(() => trx.rollback())
@@ -83,6 +84,26 @@ export default function placeYourBet({ bet }) {
       .returning('*')
       .then(res => (victimUserBet = res));
   }
+
+  function updateCompanyStats() {
+    if (company) {
+      return trx.raw(`
+WITH userCounts AS (
+  SELECT company_id,
+         jsonb_build_object('users', count(*)) AS stats
+  FROM users
+  WHERE company_id = :companyId
+  GROUP BY company_id
+)
+
+UPDATE companies
+SET stats = userCounts.stats
+FROM userCounts
+WHERE companies.id = userCounts.company_id      
+    `, { companyId: company.id });
+    }
+  }
+
 
   function updateVictimStats() {
     return trx.raw(`

@@ -30,6 +30,6 @@
     "copy:config": "cp ./deploy/config/api/local-production.json ./deploy/build/api/config/",
     "build": "yarn docker:build:all && yarn build:all && yarn copy:config",
 
-    "deploy": "yarn build && yarn workspace deploy run deploy:production && yarn db:migrate:production"
+    "deploy": "yarn build && yarn db:migrate:production && yarn workspace deploy run deploy:production"
   }
 }
