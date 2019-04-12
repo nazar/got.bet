@@ -1,10 +1,10 @@
 import React from 'react';
-import { Container, Segment, Header } from 'semantic-ui-react';
+import { Container, Segment, Header, Icon } from 'semantic-ui-react';
 
 export default function About() {
   return (
     <Container className="view-page">
-      <Header>What's this About??</Header>
+      <AboutHeader />
 
       <Segment placeholder size="big">
         <p>
@@ -24,4 +24,15 @@ export default function About() {
       </Segment>
     </Container>
   );
+
+  function AboutHeader() {
+    return (
+      <Header as="h1">
+        <Icon name="question" />
+        <Header.Content>
+          About GoT.Bet
+        </Header.Content>
+      </Header>
+    );
+  }
 }

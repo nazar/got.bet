@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Container, List, Table, Transition } from 'semantic-ui-react';
+import { Container, Header, Icon, List, Table, Transition } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import LabelContent from 'components/shared/LabelContent';
@@ -30,6 +30,8 @@ export default function CompaniesList() {
 
   return (
     <Container className="view-page companies-list">
+      <CompanyListHeader />
+
       <UberPaginator
         summaryQuery={summaryQuery}
         itemsQuery={itemsQuery}
@@ -44,6 +46,20 @@ export default function CompaniesList() {
   );
 
   // implementation
+
+  function CompanyListHeader() {
+    return (
+      <Header as="h1">
+        <Icon name="building" />
+        <Header.Content>
+          Participating Companies
+          <Header.Subheader>
+            Click on each company to view betting pools
+          </Header.Subheader>
+        </Header.Content>
+      </Header>
+    );
+  }
 
   function DesktopDisplay({ companies }) {
     return (
@@ -82,7 +98,7 @@ export default function CompaniesList() {
               <List.Item>
                 <LabelContent
                   label="Company"
-                  content={<strong>{company.name}</strong>}
+                  content={<strong><Link to={`/companies/${company.name}`}>{company.name}</Link></strong>}
                 />
               </List.Item>
 

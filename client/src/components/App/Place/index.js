@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Button, Header, Form, Table, Container, Message } from 'semantic-ui-react';
+import { Button, Header, Form, Table, Container, Message, Icon } from 'semantic-ui-react';
 import { Formik, Form as FormikForm } from 'formik';
 import { Helmet } from 'react-helmet';
 import debounce from 'debounce-promise';
@@ -29,7 +29,7 @@ export default function PlaceYourBet({ history }) {
     <Container className="view-page">
       <Helmet title="Place Your Bet" />
 
-      <Header>Place Your Bets</Header>
+      <PlaceHeader />
 
       <Formik
         enableReinitialize
@@ -45,6 +45,19 @@ export default function PlaceYourBet({ history }) {
 
   // sub components
 
+  function PlaceHeader() {
+    return (
+      <Header as="h1">
+        <Icon name="ticket" />
+        <Header.Content>
+          Place your bet
+          <Header.Subheader>
+            On Who Lives, Who Dies, Who Wights.
+          </Header.Subheader>
+        </Header.Content>
+      </Header>
+    );
+  }
 
   // handlers && helpers
 
@@ -119,10 +132,10 @@ function PlaceYourBetForm({ formik: { values, errors, submitForm, isSubmitting }
         </Message>
       </Form.Field>
 
+      <Header>Your Bet</Header>
       <Message>
         Select which Game of Thrones character lives, dies or becomes a wight by the end of season 8
       </Message>
-
       <YourBet />
 
       {!(_.isEmpty(errors)) && (

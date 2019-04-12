@@ -1,15 +1,14 @@
 import _ from 'lodash';
 import React from 'react';
-import { Container, Table, Icon, Transition, List } from 'semantic-ui-react';
+import { Container, Table, Icon, Transition, Header } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
-import Company from 'components/shared/Company';
 import Section from 'components/shared/Section';
 import PlayerImage from 'components/shared/PlayerImage';
+import Avatar from 'components/shared/Avatar';
+import TimeAgo from 'components/shared/TimeAgo';
 
 import useQuery from 'hooks/useQuery';
-import Avatar from '../../../shared/Avatar';
-import LabelContent from '../../../shared/LabelContent';
-import TimeAgo from '../../../shared/TimeAgo';
 
 import getBetQuery from './getBet.gql';
 
@@ -60,21 +59,17 @@ export default function Bet({ match: { params: { username } } }) {
 
   function UserInformation() {
     return (
-      <List verticalAlign="middle" className="mobile-list-item" key={`${userByName.id}`}>
-        <List.Item>
-          <Avatar user={userByName} />&nbsp;
+      <Header as="h1">
+        <Avatar user={userByName} />
+        <Header.Content>
           <User />
-        </List.Item>
-        <List.Item>
-          <Company label user={userByName} />
-        </List.Item>
-        <List.Item>
-          <LabelContent
-            label="Placed bet"
-            content={<TimeAgo noMargin plain date={userByName.createdAt} />}
-          />
-        </List.Item>
-      </List>
+          <Header.Subheader>
+
+            <Company />
+            Bet about <TimeAgo noMargin plain date={userByName.createdAt} />
+          </Header.Subheader>
+        </Header.Content>
+      </Header>
     );
 
     //
@@ -87,6 +82,18 @@ export default function Bet({ match: { params: { username } } }) {
       return (
         <strong>{content}</strong>
       );
+    }
+
+    function Company() {
+      if (userByName.company) {
+        return (
+          <div>
+            <Link to={`/companies/${userByName.company.name}`}>{userByName.company.name}</Link>
+          </div>
+        );
+      } else {
+        return null;
+      }
     }
   }
 

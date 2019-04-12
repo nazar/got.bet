@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
-import { Card, Container } from 'semantic-ui-react';
+import { Card, Container, Header, Icon } from 'semantic-ui-react';
 
 import useQuery from 'hooks/useQuery';
 
@@ -24,6 +24,8 @@ export default function Players() {
 
   return (
     <Container className="view-page">
+      <PlayersHeader />
+
       <Section loading={loading}>
         <Sorter sortOrder={sortOrder} onSort={order => setSortOrder(order)} />
         <Card.Group>
@@ -34,6 +36,20 @@ export default function Players() {
   );
 
   //
+
+  function PlayersHeader() {
+    return (
+      <Header as="h1">
+        <Icon name="chess queen" />
+        <Header.Content>
+          The Players
+          <Header.Subheader>
+            Who Wins? Who Dies? Who Wights?
+          </Header.Subheader>
+        </Header.Content>
+      </Header>
+    );
+  }
 
   function Victim({ victim, ...rest }) {
     const statusOverride = victim.name === 'The Mountain' ? 'Alive?' : null;

@@ -1,0 +1,12 @@
+query company($name: String!) {
+  company(name: $name) {
+    id
+    name
+    url
+    createdAt
+
+    stats {
+      users
+    }
+  }
+}

@@ -5,7 +5,7 @@ import { Dropdown, Header, Icon } from 'semantic-ui-react';
 
 export default function Sorter({ sortOrder, onSort = () => {} } = {}) {
   return (
-    <Header as="h2">
+    <Header as="h3">
       <Icon name="sort" />
       <Header.Content>
         Sort Players by{' '}
