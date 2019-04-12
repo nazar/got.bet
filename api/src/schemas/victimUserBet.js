@@ -45,6 +45,11 @@ export const victimUserBetTypeDefs = `
     companyUrl: String
     
     bet: [BetItem!]
+    
+    # bonus section
+    dennyPregz: Boolean
+    killsNightKingId: ID
+    winsThroneId: ID
   }
 `;
 

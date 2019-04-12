@@ -8,6 +8,7 @@ import { companyTypeDefs, companyResolvers } from 'schemas/company';
 import { userTypeDefs, userResolvers } from 'schemas/user';
 import { victimTypeDefs, victimResolvers } from 'schemas/victim';
 import { victimUserBetTypeDefs, victimUserBetResolvers } from 'schemas/victimUserBet';
+import { victimUserBonusTypeDefs, victimUserBonusResolvers } from 'schemas/victimUserBonus';
 
 
 const scalars = `
@@ -56,7 +57,8 @@ export default makeExecutableSchema({
     companyTypeDefs,
     userTypeDefs,
     victimTypeDefs,
-    victimUserBetTypeDefs
+    victimUserBetTypeDefs,
+    victimUserBonusTypeDefs
   ],
 
   resolvers: _.merge(
@@ -65,6 +67,7 @@ export default makeExecutableSchema({
     companyResolvers,
     userResolvers,
     victimResolvers,
-    victimUserBetResolvers
+    victimUserBetResolvers,
+    victimUserBonusResolvers
   )
 });

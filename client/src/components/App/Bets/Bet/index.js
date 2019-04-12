@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Container, Table, Icon, Transition, Header } from 'semantic-ui-react';
+import { Card, Container, Table, Icon, Transition, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import Section from 'components/shared/Section';
@@ -11,6 +11,7 @@ import TimeAgo from 'components/shared/TimeAgo';
 import useQuery from 'hooks/useQuery';
 
 import getBetQuery from './getBet.gql';
+import './bet.styl';
 
 
 export default function Bet({ match: { params: { username } } }) {
@@ -20,7 +21,7 @@ export default function Bet({ match: { params: { username } } }) {
   });
 
   return (
-    <Container className="view-page">
+    <Container className="view-page bet">
       <Section loading={loading}>
         {() => (
           <>
@@ -51,6 +52,8 @@ export default function Bet({ match: { params: { username } } }) {
                 </Transition.Group>
               </Table.Body>
             </Table>
+
+            <BonusSection />
           </>
         )}
       </Section>
@@ -100,6 +103,70 @@ export default function Bet({ match: { params: { username } } }) {
   function Selection({ value, victimBet: { status } }) {
     if (value === status) {
       return <Icon name="circle" />;
+    } else {
+      return null;
+    }
+  }
+
+  function BonusSection() {
+    if (userByName.bonus) {
+      const { bonus: { dennyPregz, killsNightKing, winsThrone } } = userByName;
+
+      return (
+        <Card.Group>
+          <Card centered>
+            <PlayerImage
+              cover
+              card
+              player={{ name: 'Daenerys Targaryen' }}
+              size="large"
+              label={{ as: 'span', color: 'grey', corner: 'left', icon: 'child', size: 'big' }}
+            />
+            <Card.Content>
+              <Card.Header>Is Daenerys Pregnant?</Card.Header>
+            </Card.Content>
+            <Card.Content extra>
+              { dennyPregz ? 'Yes' : 'No' }
+            </Card.Content>
+          </Card>
+
+          {killsNightKing && (
+            <Card centered>
+              <PlayerImage
+                cover
+                card
+                player={killsNightKing}
+                size="large"
+                label={{ as: 'span', color: 'grey', corner: 'left', icon: 'chess knight', size: 'big' }}
+              />
+              <Card.Content>
+                <Card.Header>{ killsNightKing.name }</Card.Header>
+              </Card.Content>
+              <Card.Content extra>
+                Kills the Night King
+              </Card.Content>
+            </Card>
+          )}
+
+          {winsThrone && (
+            <Card centered>
+              <PlayerImage
+                cover
+                card
+                player={winsThrone}
+                size="large"
+                label={{ as: 'span', color: 'grey', corner: 'left', icon: 'winner', size: 'big' }}
+              />
+              <Card.Content>
+                <Card.Header>{ winsThrone.name }</Card.Header>
+              </Card.Content>
+              <Card.Content extra>
+                Wins the Iron Throne
+              </Card.Content>
+            </Card>
+          )}
+        </Card.Group>
+      );
     } else {
       return null;
     }

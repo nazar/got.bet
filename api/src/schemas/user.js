@@ -34,6 +34,7 @@ export const userTypeDefs = `
     
     # associations
     company: Company
+    bonus: VictimUserBonus
   }
   
   # inputs
@@ -48,6 +49,8 @@ export const userTypeDefs = `
 
 export const userResolvers = {
   User: {
+    bonus: async (user, vars, context) => context.loaders.bonusByUserId.load(user.id),
+
     company: async (user, vars, context) => user.companyId && context.loaders.companiesById.load(user.companyId),
     gravatarHash: async (user) => {
       if (user.email) {

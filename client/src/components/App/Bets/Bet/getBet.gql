@@ -5,6 +5,19 @@ query getBet($username: String!) {
     gravatarHash
     createdAt
 
+    bonus {
+      id
+      dennyPregz
+
+      killsNightKing {
+        name
+      }
+
+      winsThrone {
+        name
+      }
+    }
+
     company {
       name
       url

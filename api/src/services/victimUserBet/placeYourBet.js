@@ -5,6 +5,8 @@ import * as yup from 'yup';
 import Company from 'models/company';
 import User from 'models/user';
 import VictimUserBet from 'models/victimUserBet';
+import VictimUserBonus from 'models/victimUserBonus';
+
 
 export default function placeYourBet({ bet }) {
   let trx;
@@ -21,6 +23,7 @@ export default function placeYourBet({ bet }) {
     .then(createCompany)
     .then(createUser)
     .then(placeBet)
+    .then(saveBonusSection)
     .then(updateCompanyStats)
     .then(updateVictimStats)
     .then(() => trx.commit())
@@ -83,6 +86,19 @@ export default function placeYourBet({ bet }) {
       .insert(betPayload)
       .returning('*')
       .then(res => (victimUserBet = res));
+  }
+
+  function saveBonusSection() {
+    const { dennyPregz, killsNightKingId, winsThroneId } = payload;
+
+    return VictimUserBonus
+      .query(trx)
+      .insert({
+        userId: user.id,
+        dennyPregz,
+        killsNightKingId,
+        winsThroneId
+      });
   }
 
   function updateCompanyStats() {
@@ -153,5 +169,9 @@ const validationSchema = yup.object({
   bet: yup.array().of(yup.object({
     id: yup.number().required(),
     status: yup.string().oneOf(['alive', 'dead', 'wight'])
-  }))
+  })),
+
+  dennyPregz: yup.boolean().default(false),
+  killsNightKingId: yup.number(),
+  winsThroneId: yup.number()
 });

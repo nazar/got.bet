@@ -61,6 +61,10 @@ export default function PlayerImage({ player, popup, cover, card, ...rest }) {
   }
 }
 
+export function playerImage(name) {
+  return imageMap[name];
+}
+
 const imageMap = {
   'John Snow': john,
   'Sansa Stark': sansa,

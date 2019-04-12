@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Button, Header, Form, Table, Container, Message, Icon } from 'semantic-ui-react';
+import { Button, Header, Form, Table, Container, Message, Icon, Segment } from 'semantic-ui-react';
 import { Formik, Form as FormikForm } from 'formik';
 import { Helmet } from 'react-helmet';
 import debounce from 'debounce-promise';
@@ -9,24 +9,28 @@ import * as yup from 'yup';
 
 import client from 'client';
 
+import Checkbox from 'components/shared/FormikFields/Checkbox';
+import Dropdown from 'components/shared/FormikFields/Dropdown';
 import Input from 'components/shared/FormikFields/Input';
 import Radio from 'components/shared/FormikFields/Radio';
 import FormFieldErrorMessage from 'components/shared/FormFieldErrorMessage';
 
 import useQuery from 'hooks/useQuery';
-import PlayerImage from '../../shared/PlayerImage';
+import PlayerImage, { playerImage } from 'components/shared/PlayerImage';
 
 import companiesQuery from './queries/companies.gql';
 import validNameQuery from './queries/validName.gql';
 import victimsQuery from './queries/victims.gql';
 import placeYourbetMutation from './queries/placeYourBet.gql';
 
+import './place.styl';
+
 
 export default function PlaceYourBet({ history }) {
   const victimsValues = useVictims();
 
   return (
-    <Container className="view-page">
+    <Container className="view-page place-bet">
       <Helmet title="Place Your Bet" />
 
       <PlaceHeader />
@@ -37,7 +41,7 @@ export default function PlaceYourBet({ history }) {
         validationSchema={validationSchema}
         validateOnChange={false}
         onSubmit={handleSubmit}
-        render={formik => <PlaceYourBetForm formik={formik} />}
+        render={formik => <PlaceYourBetForm formik={formik} players={victimsValues} />}
       />
 
     </Container>
@@ -87,7 +91,7 @@ export default function PlaceYourBet({ history }) {
   }
 }
 
-function PlaceYourBetForm({ formik: { values, errors, submitForm, isSubmitting } }) {
+function PlaceYourBetForm({ players, formik: { values, errors, submitForm, isSubmitting } }) {
   return (
     <Form as={FormikForm} autoComplete="off">
       <Header>Your Details</Header>
@@ -144,6 +148,9 @@ function PlaceYourBetForm({ formik: { values, errors, submitForm, isSubmitting }
         </Message>
       )}
 
+      <Header>Bonus Section</Header>
+      <BonusSection />
+
       <Button primary disabled={isSubmitting} loading={isSubmitting} onClick={submitForm}>Place My Bet!!</Button>
     </Form>
   );
@@ -189,6 +196,50 @@ function PlaceYourBetForm({ formik: { values, errors, submitForm, isSubmitting }
       </Table>
     );
   }
+
+  function BonusSection() {
+    const playerOptions = mapPlayersToOptions();
+
+    return (
+      <Segment className="bonus" padded>
+        <Form.Field>
+          <label>Danearys is pregnant for 1 bonus point</label>
+          <Checkbox name="dennyPregz" />
+        </Form.Field>
+
+        <Form.Field>
+          <label>Kills the Night King for 2 bonus points</label>
+          <Dropdown
+            selection
+            search
+            name="killsNightKingId"
+            placeholder="Who will it be?"
+            options={playerOptions}
+          />
+        </Form.Field>
+
+        <Form.Field>
+          <label>Holds the Iron Throne at the end for 4 bonus points</label>
+          <Dropdown
+            selection
+            search
+            name="winsThroneId"
+            placeholder="Who will it be?"
+            options={playerOptions}
+          />
+        </Form.Field>
+      </Segment>
+    );
+
+    function mapPlayersToOptions() {
+      return _.map(players.bet, player => ({
+        key: player.id,
+        text: player.name,
+        value: player.id,
+        image: { avatar: true, src: playerImage(player.name) }
+      }));
+    }
+  }
 }
 
 const validationSchema = yup.object({
@@ -220,7 +271,11 @@ const validationSchema = yup.object({
   bet: yup.array().of(yup.object({
     id: yup.number().required(),
     status: yup.string().oneOf(['alive', 'dead', 'wight'])
-  }))
+  })),
+
+  dennyPregz: yup.boolean().default(false),
+  killsNightKingId: yup.number(),
+  winsThroneId: yup.number()
 });
 
 function forumNameExists(name) {
