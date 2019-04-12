@@ -15,7 +15,7 @@ export const victimTypeDefs = `
     # victim's status
     status: VictimStatus
     # display order - natural sorting
-    displayOrder: Int!
+    displayOrder: Float!
     # voting statistics
     stats: VictimStats
   }

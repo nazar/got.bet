@@ -19,6 +19,7 @@ import jaime from './assets/jaime.jpg';
 import john from './assets/john.jpg';
 import jorah from './assets/jorah.jpg';
 import melisandre from './assets/melisandre.jpg';
+import missandei from './assets/missandei.png';
 import mountain from './assets/mountain.jpg';
 import podrick from './assets/podrick.jpg';
 import samchild from './assets/samchild.jpg';
@@ -72,6 +73,7 @@ const imageMap = {
   'Yara Greyjoy': yara,
   'Theon Greyjoy': theon,
   Melisandre: melisandre,
+  Missandei: missandei,
   'Jorah Mormont': jorah,
   'The Hound': hound,
   'The Mountain': mountain,
