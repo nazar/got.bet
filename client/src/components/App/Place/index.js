@@ -28,6 +28,7 @@ import './place.styl';
 
 export default function PlaceYourBet({ history }) {
   const victimsValues = useVictims();
+  const companiesList = useCompanies();
 
   return (
     <Container className="view-page place-bet">
@@ -41,7 +42,7 @@ export default function PlaceYourBet({ history }) {
         validationSchema={validationSchema}
         validateOnChange={false}
         onSubmit={handleSubmit}
-        render={formik => <PlaceYourBetForm formik={formik} players={victimsValues} />}
+        render={formik => <PlaceYourBetForm formik={formik} players={victimsValues} companies={companiesList} />}
       />
 
     </Container>
@@ -89,9 +90,21 @@ export default function PlaceYourBet({ history }) {
 
     return { bet };
   }
+
+  function useCompanies() {
+    const { data: { companies } } = useQuery({
+      query: companiesQuery
+    });
+
+    return _.map(companies, company => ({
+      key: company.id,
+      text: company.name,
+      value: company.name
+    }));
+  }
 }
 
-function PlaceYourBetForm({ players, formik: { values, errors, submitForm, isSubmitting } }) {
+function PlaceYourBetForm({ players, companies, formik: { values, errors, submitForm, isSubmitting } }) {
   return (
     <Form as={FormikForm} autoComplete="off">
       <Header>Your Details</Header>
@@ -119,8 +132,16 @@ function PlaceYourBetForm({ players, formik: { values, errors, submitForm, isSub
       </Form.Field>
 
       <Form.Field>
-        <Input fast placeholder="Select your company" name="company" list="companies" />
-        <CompaniesList />
+        <Dropdown
+          selection
+          search
+          allowAdditions
+          clearable
+          placeholder="Select or add your company"
+          name="company"
+          options={companies}
+          onAddItem={handleAddItem}
+        />
         <Message info>
           Want to play along with your colleagues? Add your company name here and we'll group your colleagues
           under the same company.
@@ -155,18 +176,8 @@ function PlaceYourBetForm({ players, formik: { values, errors, submitForm, isSub
     </Form>
   );
 
-  function CompaniesList() {
-    const { data: { companies } } = useQuery({
-      query: companiesQuery
-    });
-
-    return (
-      <datalist id="companies">
-        {_.map(companies, ({ id, name }) => (
-          <option value={name} key={id} />
-        ))}
-      </datalist>
-    );
+  function handleAddItem(e, { value }) {
+    companies.push({ text: value, value });
   }
 
   function YourBet() {
@@ -212,6 +223,7 @@ function PlaceYourBetForm({ players, formik: { values, errors, submitForm, isSub
           <Dropdown
             selection
             search
+            clearable
             name="killsNightKingId"
             placeholder="Who will it be?"
             options={playerOptions}
@@ -223,6 +235,7 @@ function PlaceYourBetForm({ players, formik: { values, errors, submitForm, isSub
           <Dropdown
             selection
             search
+            clearable
             name="winsThroneId"
             placeholder="Who will it be?"
             options={playerOptions}

@@ -33,7 +33,7 @@ module.exports = function ( gruntOrShipit ) {
         await shipit.remote('mkdir -p ' + shipit.releasePath + '/api/tmp');
         await shipit.remote('touch ' + shipit.releasePath + '/api/tmp/restart.txt');
         // cold start passenger process
-        await shipit.remote('curl http://got.bet > /dev/null');
+        await shipit.remote('curl http://got.bet/bets > /dev/null');
     } );
 
     utils.registerTask( shipit, 'deploy-local', [

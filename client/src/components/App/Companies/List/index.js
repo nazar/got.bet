@@ -67,7 +67,7 @@ export default function CompaniesList() {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Company</Table.HeaderCell>
-            <Table.HeaderCell>Participants</Table.HeaderCell>
+            <Table.HeaderCell>Bets</Table.HeaderCell>
             <Table.HeaderCell>Joined</Table.HeaderCell>
             <Table.HeaderCell>Score</Table.HeaderCell>
           </Table.Row>
@@ -104,7 +104,7 @@ export default function CompaniesList() {
 
               <List.Item>
                 <LabelContent
-                  label="Participants"
+                  label="Bets"
                   content={company.stats.users}
                 />
               </List.Item>

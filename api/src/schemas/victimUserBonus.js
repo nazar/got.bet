@@ -23,9 +23,9 @@ export const victimUserBonusTypeDefs = `
 export const victimUserBonusResolvers = {
   VictimUserBonus: {
     killsNightKing: async (victimUserBonus, vars, context) =>
-      context.loaders.victimsById.load(victimUserBonus.killsNightKingId),
+      victimUserBonus.killsNightKingId && context.loaders.victimsById.load(victimUserBonus.killsNightKingId),
 
     winsThrone: async (victimUserBonus, vars, context) =>
-      context.loaders.victimsById.load(victimUserBonus.winsThroneId)
+      victimUserBonus.winsThroneId && context.loaders.victimsById.load(victimUserBonus.winsThroneId)
   }
 };
