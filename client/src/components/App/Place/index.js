@@ -291,7 +291,7 @@ const validationSchema = yup.object({
   winsThroneId: yup.number()
 });
 
-function forumNameExists(name) {
+function userNameExists(name) {
   if ((name || '').length > 2) {
     return client
       .query({
@@ -303,4 +303,4 @@ function forumNameExists(name) {
   }
 }
 
-const debouncedNameExists = debounce(forumNameExists, 250);
+const debouncedNameExists = debounce(userNameExists, 250);

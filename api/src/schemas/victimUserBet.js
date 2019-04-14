@@ -59,9 +59,9 @@ export const victimUserBetResolvers = {
     victim: async (victimUserBet, vars, context) => context.loaders.victimsById.load(victimUserBet.victimId)
   },
   Query: {
-    victimsBetForUser: async (obj, { username }) => resolve(getBetsForUserByUsername({ username }))
+    victimsBetForUser: (obj, { username }) => resolve(getBetsForUserByUsername({ username }))
   },
   Mutation: {
-    placeYourBet: async (obj, { bet }) => resolve(placeYourBet({ bet }))
+    placeYourBet: (obj, { bet }) => resolve(placeYourBet({ bet }))
   }
 };

@@ -158,7 +158,7 @@ const validationSchema = yup.object({
     .default('')
     .test(
       'valid_chars',
-      '${value} is not a valid name. Only charaters and _ are allowed', // eslint-disable-line
+      '${value} is not a valid name. Only characters and _ are allowed', // eslint-disable-line
       value => !(_.isNull(value.match(/^[A-Za-z_\-\s]+$/)))
     ),
   email: yup.string().email(),
