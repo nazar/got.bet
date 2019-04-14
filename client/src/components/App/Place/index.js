@@ -83,7 +83,8 @@ export default function PlaceYourBet({ history }) {
 
   function useVictims() {
     const { data: { victims } } = useQuery({
-      query: victimsQuery
+      query: victimsQuery,
+      variables: { search: { valid: true  } }
     });
 
     const bet = _.orderBy(victims, 'displayOrder');

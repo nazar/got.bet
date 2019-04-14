@@ -1,5 +1,5 @@
-query victims {
-  victims {
+query victims($search: VictimsSearchInput) {
+  victims(search: $search) {
     id
     name
     displayOrder

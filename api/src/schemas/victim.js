@@ -1,9 +1,11 @@
-import Victim from 'models/victim';
+import { resolve } from 'bluebird';
+
+import getVictims from 'services/victim/getVictims';
 
 export const victimTypeDefs = `
   extend type Query {
     # get list of GoT Victims
-    victims: [Victim!]
+    victims(search: VictimsSearchInput): [Victim!]
   }
   
   # types
@@ -34,10 +36,18 @@ export const victimTypeDefs = `
     wight
   }
   
+  
+  # inputs
+  
+  input VictimsSearchInput {
+    # returns only alive victims
+    valid: Boolean!
+  }
+  
 `;
 
 export const victimResolvers = {
   Query: {
-    victims: async () => Victim.query().orderBy('displayOrder', 'asc')
+    victims: (obj, { search }) => resolve(getVictims({ search }))
   }
 };
