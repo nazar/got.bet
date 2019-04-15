@@ -6,6 +6,7 @@ import { GraphQLDateTime } from 'graphql-iso-date';
 
 import { companyTypeDefs, companyResolvers } from 'schemas/company';
 import { userTypeDefs, userResolvers } from 'schemas/user';
+import { userScoreHistoryTypeDefs, userScoreHistoryResolvers } from 'schemas/userScoreHistory';
 import { victimTypeDefs, victimResolvers } from 'schemas/victim';
 import { victimUserBetTypeDefs, victimUserBetResolvers } from 'schemas/victimUserBet';
 import { victimUserBonusTypeDefs, victimUserBonusResolvers } from 'schemas/victimUserBonus';
@@ -41,6 +42,11 @@ const common = `
     offset: Int
     limit: Int
   }
+  
+  enum SortDirection {
+    asc
+    desc
+  }
 `;
 
 const ScalerResolvers = {
@@ -56,6 +62,7 @@ export default makeExecutableSchema({
 
     companyTypeDefs,
     userTypeDefs,
+    userScoreHistoryTypeDefs,
     victimTypeDefs,
     victimUserBetTypeDefs,
     victimUserBonusTypeDefs
@@ -66,6 +73,7 @@ export default makeExecutableSchema({
 
     companyResolvers,
     userResolvers,
+    userScoreHistoryResolvers,
     victimResolvers,
     victimUserBetResolvers,
     victimUserBonusResolvers

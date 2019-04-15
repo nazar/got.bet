@@ -12,7 +12,7 @@ export const userTypeDefs = `
     userByName(name: String!): User
     
     # get users
-    users(search: SearchInput, page: PaginationInput): [User!]
+    users(search: SearchInput, page: PaginationInput, sort: UserSortInput): [User!]
     usersSummary(search: SearchInput): ListsSummary
     
     # check name validity, specifically if the username is taken 
@@ -32,9 +32,31 @@ export const userTypeDefs = `
     # user created timestamp
     createdAt: GraphQLDateTime
     
+    # current bet scores
+    scores: UserScores
+    
     # associations
     company: Company
     bonus: VictimUserBonus
+  }
+  
+  type UserScores {
+    # correct bets 
+    right: Int!
+    # incorrect bets
+    wrong: Int!
+    # right - wrong bets
+    total: Int!
+    # total as percentage 
+    totalPercent: Float!
+  }
+  
+  # enums
+  
+  enum UserSortField {
+    name
+    joined
+    score 
   }
   
   # inputs
@@ -44,6 +66,11 @@ export const userTypeDefs = `
     company: String
     # users by name
     name: String
+  }
+  
+  input UserSortInput {
+    direction: SortDirection
+    field: UserSortField
   }
 `;
 
@@ -62,8 +89,8 @@ export const userResolvers = {
   Query: {
     userByName: async (obj, { name }) => User.query().where({ name }).first(),
 
-    users: (obj, { search, page: { limit = 20, offset } = {} } = {}) =>
-      resolve(getUsers({ search, page: { limit, offset } })),
+    users: (obj, { search, page: { limit = 20, offset } = {}, sort } = {}) =>
+      resolve(getUsers({ search, page: { limit, offset }, sort })),
 
     usersSummary: (obj, { search }) => resolve(getUsersSummary({ search })),
 

@@ -77,7 +77,7 @@ export default function CompaniesList() {
           <Transition.Group>
             {_.map(companies, company => (
               <Table.Row key={`${company.id}`}>
-                <Table.Cell collapsing><Link to={`/companies/${company.name}`}>{company.name}</Link></Table.Cell>
+                <Table.Cell><Link to={`/companies/${company.name}`}>{company.name}</Link></Table.Cell>
                 <Table.Cell>{company.stats.users}</Table.Cell>
                 <Table.Cell><TimeAgo date={company.createdAt} /></Table.Cell>
                 <Table.Cell>-</Table.Cell>
