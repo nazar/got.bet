@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { List, Table, Transition } from 'semantic-ui-react';
 
@@ -15,6 +15,8 @@ import UserScore from '../UserScore';
 import Sorter from './components/Sorter';
 
 export default function BetList({ usersSummaryQuery, usersQuery, variables, defaultSort, hideCompany }) {
+  const [sort, setSort] = useState(desctructSort(defaultSort));
+
   const summaryQuery = {
     query: usersSummaryQuery,
     variables,
@@ -23,7 +25,7 @@ export default function BetList({ usersSummaryQuery, usersQuery, variables, defa
 
   const itemsQuery = {
     query: usersQuery,
-    variables: { ...(variables || {}), ...desctructSort(defaultSort) },
+    variables: { ...(variables || {}), ...sort },
     dataKey: 'users',
     fetchPolicy: 'network-only'
   };
@@ -36,9 +38,9 @@ export default function BetList({ usersSummaryQuery, usersQuery, variables, defa
       summaryQuery={summaryQuery}
       itemsQuery={itemsQuery}
     >
-      {({ items: users, loading, refetch }) => (
+      {({ items: users, loading }) => (
         <>
-          <Sorter sortOrder={defaultSort} onSort={handleSort(refetch)} />
+          <Sorter sortOrder={defaultSort} onSort={handleSort} />
           <Section loading={loading}>
             <ListComponent users={users} />
           </Section>
@@ -47,10 +49,8 @@ export default function BetList({ usersSummaryQuery, usersQuery, variables, defa
     </UberPaginator>
   );
 
-  function handleSort(refetch) {
-    return (order) => {
-      refetch(_.merge({}, variables, desctructSort(order)));
-    };
+  function handleSort(order) {
+    setSort(desctructSort(order));
   }
 
   function DesktopDisplay({ users }) {
