@@ -38,7 +38,7 @@ class UberPaginator extends React.Component {
         variables={summaryQuery.variables}
         fetchPolicy={summaryQuery.fetchPolicy}
       >
-        {({ data, loading: loadingSummary, refetch: refetchSummary }) => {
+        {({ data, loading: loadingSummary }) => {
           const { search } = location;
 
           const totalPages = _.ceil(_.get(data, [summaryQuery.dataKey, 'count'], 0) / perPage);
@@ -61,7 +61,7 @@ class UberPaginator extends React.Component {
                   {
                     children({
                       subscribeToMore,
-                      refetch: () => { refetchSummary(); refetch(); },
+                      refetch,
                       loading: loadingSummary || loadingItems,
                       items: _.get(dataItems, itemsQuery.dataKey),
                       page

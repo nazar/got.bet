@@ -31,6 +31,7 @@ export default function CompanyBetList({ match: { params: { company: companyName
               usersQuery={usersQuery}
               usersSummaryQuery={usersSummaryQuery}
               variables={{ search: { company: companyName } }}
+              defaultSort="score:desc"
             />
           </>
         )}

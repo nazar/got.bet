@@ -13,6 +13,7 @@ export default function BetList() {
       <BetListHeader />
 
       <UsersList
+        defaultSort="createdAt:desc"
         usersQuery={usersQuery}
         usersSummaryQuery={usersSummaryQuery}
       />

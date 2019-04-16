@@ -1,14 +1,18 @@
-query users($page: PaginationInput) {
-  users(page: $page) {
+fragment userFields on User {
     id
     name
     url
     gravatarHash
     createdAt
 
+    scores {
+      right
+      wrong
+      totalPercent
+    }
+
     company {
       name
       url
     }
-  }
 }

@@ -32,7 +32,7 @@ WITH total AS (
                 'wrong', coalesce(scoreWrong.score, 0),
                 'total', coalesce(scoreRight.score, 0) - coalesce(scoreWrong.score, 0),
                 'victims', total.countAll,
-                'totalPercent', ((coalesce(scoreRight.score, 0) - coalesce(scoreWrong.score, 0))::real / total.countAll) * 100
+                'totalPercent', (coalesce(scoreRight.score, 0)::real / total.countAll) * 100
                 ) AS score
        FROM total,
             users

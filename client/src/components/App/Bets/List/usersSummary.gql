@@ -1,5 +1,0 @@
-query usersSummary {
-  usersSummary {
-    count
-  }
-}

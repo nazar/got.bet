@@ -5,13 +5,16 @@ import { List, Table, Transition } from 'semantic-ui-react';
 
 import useMedia, { tabletUp } from 'hooks/useMedia';
 
-import Avatar from './Avatar';
-import LabelContent from './LabelContent';
-import Section from './Section';
-import TimeAgo from './TimeAgo';
-import UberPaginator from './UberPaginator';
+import Avatar from '../Avatar';
+import LabelContent from '../LabelContent';
+import Section from '../Section';
+import TimeAgo from '../TimeAgo';
+import UberPaginator from '../UberPaginator';
+import UserScore from '../UserScore';
 
-export default function BetList({ usersSummaryQuery, usersQuery, variables, hideCompany }) {
+import Sorter from './components/Sorter';
+
+export default function BetList({ usersSummaryQuery, usersQuery, variables, defaultSort, hideCompany }) {
   const summaryQuery = {
     query: usersSummaryQuery,
     variables,
@@ -20,7 +23,7 @@ export default function BetList({ usersSummaryQuery, usersQuery, variables, hide
 
   const itemsQuery = {
     query: usersQuery,
-    variables,
+    variables: { ...(variables || {}), ...desctructSort(defaultSort) },
     dataKey: 'users',
     fetchPolicy: 'network-only'
   };
@@ -33,13 +36,22 @@ export default function BetList({ usersSummaryQuery, usersQuery, variables, hide
       summaryQuery={summaryQuery}
       itemsQuery={itemsQuery}
     >
-      {({ items: users, loading }) => (
-        <Section loading={loading}>
-          <ListComponent users={users} />
-        </Section>
+      {({ items: users, loading, refetch }) => (
+        <>
+          <Sorter sortOrder={defaultSort} onSort={handleSort(refetch)} />
+          <Section loading={loading}>
+            <ListComponent users={users} />
+          </Section>
+        </>
       )}
     </UberPaginator>
   );
+
+  function handleSort(refetch) {
+    return (order) => {
+      refetch(_.merge({}, variables, desctructSort(order)));
+    };
+  }
 
   function DesktopDisplay({ users }) {
     return (
@@ -62,7 +74,7 @@ export default function BetList({ usersSummaryQuery, usersQuery, variables, hide
                 <Table.Cell><Link to={`/bets/${user.name}`}>{user.name}</Link></Table.Cell>
                 {!(hideCompany) && <Table.Cell><Company user={user} /></Table.Cell>}
                 <Table.Cell><TimeAgo date={user.createdAt} /></Table.Cell>
-                <Table.Cell>-</Table.Cell>
+                <Table.Cell><UserScore user={user} /></Table.Cell>
               </Table.Row>
             ))}
           </Transition.Group>
@@ -105,5 +117,10 @@ export default function BetList({ usersSummaryQuery, usersQuery, variables, hide
     } else {
       return null;
     }
+  }
+
+  function desctructSort(order) {
+    const [field, direction] = _.split(order, ':');
+    return { sort: { field, direction } };
   }
 }

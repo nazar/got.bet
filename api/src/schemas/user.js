@@ -45,8 +45,6 @@ export const userTypeDefs = `
     right: Int!
     # incorrect bets
     wrong: Int!
-    # right - wrong bets
-    total: Int!
     # total as percentage 
     totalPercent: Float!
   }
@@ -54,8 +52,7 @@ export const userTypeDefs = `
   # enums
   
   enum UserSortField {
-    name
-    joined
+    createdAt
     score 
   }
   

@@ -1,14 +1,7 @@
-query users($search: SearchInput, $page: PaginationInput) {
-  users(search: $search, page: $page) {
-    id
-    name
-    url
-    gravatarHash
-    createdAt
+#import './userFields.gql'
 
-    company {
-      name
-      url
-    }
+query users($search: SearchInput, $page: PaginationInput, $sort: UserSortInput) {
+  users(search: $search, page: $page, sort: $sort) {
+    ...userFields
   }
 }
