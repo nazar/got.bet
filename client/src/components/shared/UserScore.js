@@ -10,6 +10,11 @@ export default function UserScore({ user }) {
       trigger={<Score />}
     >
       <Table definition compact basic collapsing size="small">
+        <Table.Header>
+          <Table.Row>
+            <Table.Cell colSpan={2}>Scores so far</Table.Cell>
+          </Table.Row>
+        </Table.Header>
         <Table.Body>
           <Table.Row>
             <Table.Cell>Correct</Table.Cell>
