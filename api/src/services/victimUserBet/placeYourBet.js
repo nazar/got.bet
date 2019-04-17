@@ -191,7 +191,7 @@ WITH total AS (
        FROM total,
             users
               LEFT JOIN scoreRight ON scoreRight.id = users.id
-              LEFT JOIN scoreWrong ON scoreWrong.id = scoreRight.id
+              LEFT JOIN scoreWrong ON scoreWrong.id = users.id
        WHERE users.id = :userId       
      )
 

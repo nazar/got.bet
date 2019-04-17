@@ -9,7 +9,7 @@ export default function UserScore({ user }) {
     <Popup
       trigger={<Score />}
     >
-      <Table definition compact basic collapsing size="small">
+      <Table definition compact basic collapsing unstackable size="small">
         <Table.Header>
           <Table.Row>
             <Table.Cell colSpan={2}>Scores so far</Table.Cell>

@@ -93,15 +93,24 @@ export default function BetList({ usersSummaryQuery, usersQuery, variables, defa
                 <Avatar user={user} />&nbsp;
                 <strong><Link to={`/bets/${user.name}`}>{user.name}</Link></strong>
               </List.Item>
+
               {!(hideCompany) && (
                 <List.Item>
                   <Company label user={user} />
                 </List.Item>
               )}
+
               <List.Item>
                 <LabelContent
                   label="Placed bet"
                   content={<TimeAgo noMargin date={user.createdAt} />}
+                />
+              </List.Item>
+
+              <List.Item>
+                <LabelContent
+                  label="Current Score"
+                  content={<UserScore user={user} />}
                 />
               </List.Item>
             </List>
