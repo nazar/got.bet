@@ -4,6 +4,7 @@ import * as yup from 'yup';
 
 import Company from 'models/company';
 import User from 'models/user';
+import Victim from 'models/victim';
 import VictimUserBet from 'models/victimUserBet';
 import VictimUserBonus from 'models/victimUserBonus';
 
@@ -14,12 +15,14 @@ export default function placeYourBet({ bet }) {
   let company;
   let user;
   let victimUserBet;
+  let alive;
 
   const payload = validationSchema.cast(bet, { stripUnknown: true });
 
   return transaction
     .start(Company.knex())
     .then(res => (trx = res))
+    .then(getAlive)
     .then(createCompany)
     .then(createUser)
     .then(placeBet)
@@ -32,6 +35,13 @@ export default function placeYourBet({ bet }) {
     .then(() => victimUserBet);
 
   // implementation
+
+  function getAlive() {
+    return Victim
+      .query(trx)
+      .where({ status: 'alive' })
+      .then(res => (alive = _.keyBy(res, 'id')));
+  }
 
   function createCompany() {
     if (payload.company) {
@@ -76,11 +86,14 @@ export default function placeYourBet({ bet }) {
   }
 
   function placeBet() {
-    const betPayload = _.map(payload.bet, b => ({
-      victimId: b.id,
-      userId: user.id,
-      status: b.status
-    }));
+    const betPayload = _.chain(payload.bet)
+      .filter(b => alive[b.id])
+      .map(b => ({
+        victimId: b.id,
+        userId: user.id,
+        status: b.status
+      }))
+      .value();
 
     return VictimUserBet
       .query(trx)
@@ -153,10 +166,7 @@ WHERE victims.id = victim_stats_objects.victim_id
   function updateMyScore() {
     /* eslint-disable max-len */
     return trx.raw(`
-WITH total AS (
-  SELECT count(*) countAll
-  FROM victims
-),
+WITH 
      -- the right score is calculated based on victims_users_bets.status matches
      scoreRight AS (
        SELECT users.id,
@@ -179,17 +189,25 @@ WITH total AS (
        AND users.id = :userId
        GROUP BY users.id
      ),
+     -- counts for percentage calcs
+     scoreCount AS (
+         SELECT victims_users_bets.user_id,
+                count(*) countAll
+         FROM victims_users_bets
+         WHERE victims_users_bets.user_id = :userId
+         GROUP BY victims_users_bets.user_id
+     ),
      -- build the score object
      score AS (
        SELECT users.id,
               jsonb_build_object(
                 'right', coalesce(scoreRight.score, 0),
                 'wrong', coalesce(scoreWrong.score, 0),
-                'victims', total.countAll,
-                'totalPercent', (coalesce(scoreRight.score, 0)::real / total.countAll) * 100
+                'victims', scoreCount.countAll,
+                'totalPercent', (coalesce(scoreRight.score, 0)::real / scoreCount.countAll) * 100
                 ) AS score
-       FROM total,
-            users
+       FROM scoreCount
+              INNER JOIN users ON scoreCount.user_id = users.id
               LEFT JOIN scoreRight ON scoreRight.id = users.id
               LEFT JOIN scoreWrong ON scoreWrong.id = users.id
        WHERE users.id = :userId       

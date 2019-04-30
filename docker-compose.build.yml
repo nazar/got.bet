@@ -9,8 +9,6 @@ services:
       - /app/node_modules/
       - ./client:/app
       - ./deploy/build/client:/app/build
-    depends_on:
-      - api
 
   # the API server
   api:

@@ -220,18 +220,6 @@ function PlaceYourBetForm({ players, companies, formik: { values, errors, submit
         </Form.Field>
 
         <Form.Field>
-          <label>Kills the Night King for 2 bonus points</label>
-          <Dropdown
-            selection
-            search
-            clearable
-            name="killsNightKingId"
-            placeholder="Who will it be?"
-            options={playerOptions}
-          />
-        </Form.Field>
-
-        <Form.Field>
           <label>Holds the Iron Throne at the end for 4 bonus points</label>
           <Dropdown
             selection
