@@ -1,0 +1,12 @@
+query scoreHistoryForUser($userId: ID!) {
+  scoreHistoryForUser(userId: $userId) {
+    id
+    createdAt
+
+    scores {
+      right
+      wrong
+      totalPercent
+    }
+  }
+}

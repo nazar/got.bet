@@ -3,9 +3,10 @@ import React from 'react';
 import { Card, Container, Table, Icon, Transition, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-import Section from 'components/shared/Section';
-import PlayerImage from 'components/shared/PlayerImage';
 import Avatar from 'components/shared/Avatar';
+import BetScoreHistory from 'components/shared/BetScoreHistory';
+import PlayerImage from 'components/shared/PlayerImage';
+import Section from 'components/shared/Section';
 import TimeAgo from 'components/shared/TimeAgo';
 
 import useQuery from 'hooks/useQuery';
@@ -26,6 +27,10 @@ export default function Bet({ match: { params: { username } } }) {
         {() => (
           <>
             <UserInformation />
+
+            <BetScoreHistory user={userByName} />
+
+            <Header>Current Score {userByName.scores.right}</Header>
 
             <Table unstackable>
               <Table.Header>

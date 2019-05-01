@@ -1,4 +1,10 @@
 export const userScoreHistoryTypeDefs = `
+  # queries
+  
+  extend type Query {
+    scoreHistoryForUser(userId: ID!): [UserScoreHistory!]
+  }
+
   # types
 
   type UserScoreHistory {
@@ -18,5 +24,10 @@ export const userScoreHistoryResolvers = {
   UserScoreHistory: {
     user: async (userScoreHistory, vars, context) =>
       context.loaders.usersById().load(userScoreHistory.userId)
+  },
+
+  Query: {
+    scoreHistoryForUser: async (obj, { userId }, context) =>
+      context.loaders.usersScoreHistoryByUserId.load(userId)
   }
 };

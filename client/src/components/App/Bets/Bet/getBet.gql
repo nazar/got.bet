@@ -1,5 +1,6 @@
 query getBet($username: String!) {
   userByName(name: $username) {
+    id
     name
     url
     gravatarHash
@@ -16,6 +17,10 @@ query getBet($username: String!) {
       winsThrone {
         name
       }
+    }
+
+    scores {
+      right
     }
 
     company {

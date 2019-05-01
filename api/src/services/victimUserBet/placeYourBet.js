@@ -244,6 +244,5 @@ const validationSchema = yup.object({
   })),
 
   dennyPregz: yup.boolean().default(false),
-  killsNightKingId: yup.number(),
   winsThroneId: yup.number()
 });

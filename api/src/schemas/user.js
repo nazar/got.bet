@@ -38,6 +38,7 @@ export const userTypeDefs = `
     # associations
     company: Company
     bonus: VictimUserBonus
+    scoreHistory: [UserScoreHistory!]
   }
   
   type UserScores {
@@ -76,12 +77,15 @@ export const userResolvers = {
     bonus: async (user, vars, context) => context.loaders.bonusByUserId.load(user.id),
 
     company: async (user, vars, context) => user.companyId && context.loaders.companiesById.load(user.companyId),
+
     gravatarHash: async (user) => {
       if (user.email) {
         const email = (user.email || '').trim().toLowerCase();
         return md5(email, { encoding: 'binary' });
       }
-    }
+    },
+
+    scoreHistory: async (user, vars, context) => context.loaders.usersScoreHistoryByUserId.load(user.id)
   },
   Query: {
     userByName: async (obj, { name }) => User.query().where({ name }).first(),
