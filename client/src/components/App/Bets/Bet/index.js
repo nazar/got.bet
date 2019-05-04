@@ -4,12 +4,14 @@ import { Card, Container, Table, Icon, Transition, Header } from 'semantic-ui-re
 import { Link } from 'react-router-dom';
 
 import Avatar from 'components/shared/Avatar';
-import BetScoreHistory from 'components/shared/BetScoreHistory';
 import PlayerImage from 'components/shared/PlayerImage';
 import Section from 'components/shared/Section';
 import TimeAgo from 'components/shared/TimeAgo';
 
 import useQuery from 'hooks/useQuery';
+
+import BetScoreHistory from './components/BetScoreHistory';
+
 
 import getBetQuery from './getBet.gql';
 import './bet.styl';

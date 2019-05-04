@@ -4,6 +4,7 @@ import { Header } from 'semantic-ui-react';
 import { LineChart, Line, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 
 import useQuery from 'hooks/useQuery';
+
 import userScoreHistoryQuery from './userScoreHistory.gql';
 
 export default function BetScoreHistory({ user }) {

@@ -10,6 +10,8 @@ import UsersList from 'components/shared/UsersList';
 import usersQuery from 'queries/user/users.gql';
 import usersSummaryQuery from 'queries/user/usersSummary.gql';
 
+import CompanyBetScoreHistory from './components/CompanyBetScoreHistory';
+
 import companyQuery from './company.gql';
 
 
@@ -25,6 +27,8 @@ export default function CompanyBetList({ match: { params: { company: companyName
         {() => (
           <>
             <CompanyHeader />
+
+            <CompanyBetScoreHistory company={company} />
 
             <UsersList
               hideCompany

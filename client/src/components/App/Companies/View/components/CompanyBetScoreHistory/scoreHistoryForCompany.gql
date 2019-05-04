@@ -1,0 +1,15 @@
+query scoreHistoryForCompany($companyId: ID!) {
+  scoreHistoryForCompany(companyId: $companyId) {
+    id
+    createdAt
+
+    user {
+      id
+      name
+    }
+
+    scores {
+      right
+    }
+  }
+}
