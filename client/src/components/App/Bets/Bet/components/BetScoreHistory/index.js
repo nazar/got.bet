@@ -21,7 +21,7 @@ export default function BetScoreHistory({ user }) {
         >
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
-          <Line type="monotone" dataKey="score" stroke="#82ca9d" />
+          <Line type="step" dataKey="score" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
     </div>
