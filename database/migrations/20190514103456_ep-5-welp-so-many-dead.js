@@ -7,10 +7,15 @@ const updateScores = require('../utils/updateScores');
 
 exports.up = async function(knex) {
   const victims = [
-    { name: 'Missandei', status: 'dead' }
+    { name: 'Lord Varys', status: 'dead' },
+    { name: 'Euron Greyjoy', status: 'dead' },
+    { name: 'The Hound', status: 'dead' },
+    { name: 'The Mountain', status: 'dead' },
+    { name: 'Cersei Lannister', status: 'dead' },
+    { name: 'Jaime Lannister', status: 'dead' }
   ];
 
-  const cutoff = new Date('2019-05-05T04:00:00');
+  const cutoff = new Date('2019-05-12T04:00:00');
   const victimIds = await knex('victims').whereIn('name', _.map(victims, 'name')).then(res => _.map(res, 'id'));
 
   return setLateBets(knex, victimIds, cutoff)

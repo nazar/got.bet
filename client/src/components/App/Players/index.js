@@ -52,8 +52,6 @@ export default function Players() {
   }
 
   function Victim({ victim, ...rest }) {
-    const statusOverride = victim.name === 'The Mountain' ? 'Alive?' : null;
-
     const color = {
       alive: 'teal',
       dead: 'red',
@@ -67,7 +65,7 @@ export default function Players() {
           card
           player={victim}
           size="large"
-          label={{ color, content: _.capitalize(statusOverride || victim.status), ribbon: true }}
+          label={{ color, content: _.capitalize(victim.status), ribbon: true }}
         />
         <Card.Content>
           <Card.Header>{victim.name}</Card.Header>

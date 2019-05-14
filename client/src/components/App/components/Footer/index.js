@@ -14,7 +14,7 @@ import {
 import './footer.styl';
 
 export default function Footer() {
-  const url = 'http://gotbet.nazar.dev';
+  const url = 'http://got.bet';
   const title = 'Game of Thrones - Who Lives? Who Dies? Who Wights?';
 
   return (
