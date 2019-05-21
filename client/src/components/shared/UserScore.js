@@ -18,11 +18,19 @@ export default function UserScore({ user }) {
         <Table.Body>
           <Table.Row>
             <Table.Cell>Correct</Table.Cell>
-            <Table.Cell>{scores.right}</Table.Cell>
+            <Table.Cell>{scores.right - scores.bonus}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Incorrect</Table.Cell>
             <Table.Cell>{scores.wrong}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Bonus</Table.Cell>
+            <Table.Cell>{scores.bonus}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Final Score</Table.Cell>
+            <Table.Cell>{scores.right}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell />

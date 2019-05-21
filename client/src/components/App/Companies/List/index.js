@@ -69,7 +69,6 @@ export default function CompaniesList() {
             <Table.HeaderCell>Company</Table.HeaderCell>
             <Table.HeaderCell>Bets</Table.HeaderCell>
             <Table.HeaderCell>Joined</Table.HeaderCell>
-            <Table.HeaderCell>Score</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -80,7 +79,6 @@ export default function CompaniesList() {
                 <Table.Cell><Link to={`/companies/${company.name}`}>{company.name}</Link></Table.Cell>
                 <Table.Cell>{company.stats.users}</Table.Cell>
                 <Table.Cell><TimeAgo date={company.createdAt} /></Table.Cell>
-                <Table.Cell>-</Table.Cell>
               </Table.Row>
             ))}
           </Transition.Group>
@@ -113,13 +111,6 @@ export default function CompaniesList() {
                 <LabelContent
                   label="Joined"
                   content={<TimeAgo date={company.createdAt} />}
-                />
-              </List.Item>
-
-              <List.Item>
-                <LabelContent
-                  label="Score"
-                  content="-"
                 />
               </List.Item>
             </List>

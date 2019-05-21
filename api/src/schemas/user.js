@@ -46,6 +46,10 @@ export const userTypeDefs = `
     right: Int!
     # incorrect bets
     wrong: Int!
+    # bonus score
+    bonus: Int
+    # total score
+    total: Int
     # total as percentage 
     totalPercent: Float!
   }

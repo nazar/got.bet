@@ -21,6 +21,10 @@ query getBet($username: String!) {
 
     scores {
       right
+      wrong
+      total
+      bonus
+      totalPercent
     }
 
     company {

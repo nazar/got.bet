@@ -7,6 +7,7 @@ import Avatar from 'components/shared/Avatar';
 import PlayerImage from 'components/shared/PlayerImage';
 import Section from 'components/shared/Section';
 import TimeAgo from 'components/shared/TimeAgo';
+import UserScore from 'components/shared/UserScore';
 
 import useQuery from 'hooks/useQuery';
 
@@ -32,7 +33,7 @@ export default function Bet({ match: { params: { username } } }) {
 
             <BetScoreHistory user={userByName} />
 
-            <Header>Current Score {userByName.scores.right}</Header>
+            <Header>Current Score: <UserScore user={userByName} /></Header>
 
             <Table unstackable>
               <Table.Header>

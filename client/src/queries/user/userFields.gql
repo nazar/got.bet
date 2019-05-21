@@ -8,6 +8,8 @@ fragment userFields on User {
     scores {
       right
       wrong
+      total
+      bonus
       totalPercent
     }
 

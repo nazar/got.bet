@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Button, Header, Form, Table, Container, Message, Icon, Segment } from 'semantic-ui-react';
+import { Button, Header, Form, Table, Container, Message, Icon } from 'semantic-ui-react';
 import { Formik, Form as FormikForm } from 'formik';
 import { Helmet } from 'react-helmet';
 import debounce from 'debounce-promise';
@@ -9,14 +9,13 @@ import * as yup from 'yup';
 
 import client from 'client';
 
-import Checkbox from 'components/shared/FormikFields/Checkbox';
 import Dropdown from 'components/shared/FormikFields/Dropdown';
 import Input from 'components/shared/FormikFields/Input';
 import Radio from 'components/shared/FormikFields/Radio';
 import FormFieldErrorMessage from 'components/shared/FormFieldErrorMessage';
 
 import useQuery from 'hooks/useQuery';
-import PlayerImage, { playerImage } from 'components/shared/PlayerImage';
+import PlayerImage from 'components/shared/PlayerImage';
 
 import companiesQuery from './queries/companies.gql';
 import validNameQuery from './queries/validName.gql';
@@ -105,7 +104,7 @@ export default function PlaceYourBet({ history }) {
   }
 }
 
-function PlaceYourBetForm({ players, companies, formik: { values, errors, submitForm, isSubmitting } }) {
+function PlaceYourBetForm({ companies, formik: { values, errors, submitForm, isSubmitting } }) {
   return (
     <Form as={FormikForm} autoComplete="off">
       <Header>Your Details</Header>
@@ -170,9 +169,6 @@ function PlaceYourBetForm({ players, companies, formik: { values, errors, submit
         </Message>
       )}
 
-      <Header>Bonus Section</Header>
-      <BonusSection />
-
       <Button primary disabled={isSubmitting} loading={isSubmitting} onClick={submitForm}>Place My Bet!!</Button>
     </Form>
   );
@@ -207,40 +203,6 @@ function PlaceYourBetForm({ players, companies, formik: { values, errors, submit
         </Table.Body>
       </Table>
     );
-  }
-
-  function BonusSection() {
-    const playerOptions = mapPlayersToOptions();
-
-    return (
-      <Segment className="bonus" padded>
-        <Form.Field>
-          <label>Danearys is pregnant for 1 bonus point</label>
-          <Checkbox name="dennyPregz" />
-        </Form.Field>
-
-        <Form.Field>
-          <label>Holds the Iron Throne at the end for 4 bonus points</label>
-          <Dropdown
-            selection
-            search
-            clearable
-            name="winsThroneId"
-            placeholder="Who will it be?"
-            options={playerOptions}
-          />
-        </Form.Field>
-      </Segment>
-    );
-
-    function mapPlayersToOptions() {
-      return _.map(players.bet, player => ({
-        key: player.id,
-        text: player.name,
-        value: player.id,
-        image: { avatar: true, src: playerImage(player.name) }
-      }));
-    }
   }
 }
 
